@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+             "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="drive.UserMapper">
+
+	<select id="selectById" resultType="drive.User">
+		SELECT * FROM [users] WHERE
+		id=#{id}
+	</select>
+
+	<select id="selectByU_id" resultType="drive.User">
+		SELECT * FROM [users] WHERE
+		u_id=#{u_id}
+	</select>
+
+	<select id="selectAll" resultType="drive.User">
+		SELECT * FROM [users]
+	</select>
+
+	<select id="selectPage" resultType="drive.User">
+        <![CDATA[
+        SELECT * FROM 
+        (SELECT id,u_id,u_name,u_birth,u_tel,u_group,
+        CASE #{order}
+            WHEN 0 THEN ROW_NUMBER() OVER (ORDER BY u_id)
+            WHEN 1 THEN ROW_NUMBER() OVER (ORDER BY u_name)
+        END 행번호
+        FROM [users]
+        WHERE
+        	(#{srchType}=0)OR
+        	(#{srchType}=1 AND CHARINDEX(#{srchText},u_id)>0)OR
+        	(#{srchType}=2 AND CHARINDEX(#{srchText},u_name)>0)OR
+        	(#{srchType}=3 AND #{srchText}=u_auth)
+        	)subquery
+        WHERE 행번호 > (#{currentPage} - 1) * #{pageSize} AND 행번호 <= #{currentPage} * #{pageSize}
+        ORDER BY 행번호
+        ]]>
+	</select>
+
+	<select id="selectCount" resultType="int">
+		SELECT COUNT(*)
+		FROM [users]
+		WHERE
+		(#{srchType}=0)OR
+		(#{srchType}=1 AND CHARINDEX(#{srchText},u_id)>0)OR
+		(#{srchType}=2 AND CHARINDEX(#{srchText},u_name)>0)OR
+		(#{srchType}=3 AND #{srchText}=u_auth)
+	</select>
+
+
+	<insert id="insert" useGeneratedKeys="true" keyProperty="id">
+		INSERT
+		[users] (u_id,u_pw,u_name,u_tel,u_email,u_grade,u_qpw,u_apw,u_auth,d_id)
+		VALUES (#{u_id},#{u_pw},#{u_name},#{u_tel},#{u_email},#{u_grade},#{u_qpw},#{u_apw},1,#{d_id})
+	</insert>
+
+	<update id="update">
+		UPDATE [users] SET
+		u_id = #{u_id},
+		u_name = #{u_name},
+		u_email = #{u_email},
+		u_tel = #{u_tel},
+		u_auth = #{u_auth},
+		u_qpw = #{u_qpw},
+		u_apw = #{u_apw},
+		u_grade = #{u_grade},
+		d_id = #{d_id}
+		WHERE id =#{id}
+	</update>
+
+	<update id="user_update">
+		UPDATE [users] SET
+		u_id = #{u_id},
+		u_name = #{u_name},
+		u_email = #{u_email},
+		u_tel = #{u_tel},
+		u_qpw = #{u_qpw},
+		u_apw = #{u_apw},
+		u_grade = #{u_grade},
+		d_id = #{d_id}
+		WHERE id = #{id}
+	</update>
+
+	<delete id="delete">
+		DELETE FROM [users] WHERE id = #{id}
+	</delete>
+</mapper>

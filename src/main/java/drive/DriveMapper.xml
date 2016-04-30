@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+             "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="drive.DriveMapper">
+
+	<select id="selectDriveInfo" resultType="drive.Drive">
+		SELECT
+		d.drive_name,p.p_name,d.drive_id
+		FROM [drive] d JOIN [professor] p ON
+		d.id2=p.id2 AND p.id2=#{id2}
+	</select>
+
+	<select id="selectFolderAll" resultType="drive.Folder">
+		SELECT * FROM [folder]
+	</select>
+
+	<select id="selectBydr_id1" resultType="drive.Folder">
+		SELECT folder_id,
+		folder_name,drive_id,parent_id
+		FROM folder
+		WHERE drive_id=#{dr_id}
+	</select>
+
+	<select id="selectBydr_id2" resultType="drive.Folder">
+		SELECT sfolder_id,
+		sfolder_name,drive_id,sfolder_pw
+		FROM share_folder
+		WHERE
+		drive_id=#{dr_id}
+	</select>
+
+	<select id="selectBypr_id" resultType="drive.Folder">
+		SELECT folder_id,
+		folder_name,drive_id,parent_id
+		FROM folder
+		WHERE parent_id=#{pr_id}
+	</select>
+
+	<select id="selectByf_id" resultType="drive.Files">
+		SELECT files_id,
+		files_name, files_size,files_date,folder_id
+		FROM files
+		WHERE
+		folder_id=#{folder_id}
+	</select>
+	<insert id="insert_folder" useGeneratedKeys="true" keyProperty="id">
+		INSERT
+		INTO [folder] (folder_name, drive_id, parent_id, sfolder_pw)
+		VALUES (#{folder_name},#{drive_id}, #{parent_id},null)
+	</insert>
+
+	<insert id="insert_files" useGeneratedKeys="true" keyProperty="id">
+		INSERT
+		INTO [files] (files_name, files_size, files_date,folder_id, files_body)
+		VALUES (#{files_name},#{files_size}, GETDATE(),#{folder_id}, #{data})
+	</insert>
+
+	<delete id="delete">
+		DELETE [files] WHERE [f_id] = #{f_id}
+	</delete>
+
+</mapper>
