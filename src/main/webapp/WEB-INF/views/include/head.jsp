@@ -12,5 +12,29 @@
 		$("tbody tr").click(function(){
 			location.href=$(this).attr("data-url");
 		});
+		
+		$('#share_tn').click(function(){
+			$("#share_t").toggle();
+			$("#share_n").hide();
+		});
+		$('#btn-upload').click(function(e){
+			e.preventDefault();
+			$("input:file").click();
+			var ext = $("input:file").val().split(".").pop().toLowerCase();
+			if(ext.length>0){
+				if($.inArray(ext,["gif","png","jpg","jpeg"])==-1){
+					alret("파일 업로드 제한");
+					return false;
+				}
+			}
+			$("input:file").val().toLowerCase();
+		});
 	});
+</script>
+<script type="text/javascript">
+function createFdPopup(a){
+	var popUrl = "/drive/popup/createFolder.pd?dr_id="+a;
+	var popOption = "width=500, height=230";
+		window.open(popUrl,"new",popOption);
+}
 </script>

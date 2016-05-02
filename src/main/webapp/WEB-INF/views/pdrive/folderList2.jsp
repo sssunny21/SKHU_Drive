@@ -2,25 +2,36 @@
 	pageEncoding="UTF-8"%>
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-
+<style>
+#files {
+	width: 0;
+	height: 0;
+}
+</style>
 <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main"
 	style="margin-left: 0px;">
 	<div class="header clearfix" style="margin-top: 0px;">
 		<nav>
 			<ul class="nav nav-pills pull-right">
 				<li role="presintation"><a href="#">전체 선택</a></li>
-				<li role="presintation"><a href="#">파일 올리기</a></li>
-				<li role="presintation"><a href="#">파일 내리기</a></li>
-				<li role="presintation"><a href="#">삭제</a></li>
-				<li class="dropdown"><a href="#" class="dropdown-toggle"
-					data-toggle="dropdown" role="button" aria-haspopup="true"
-					aria-expanded="false">정렬 <span class="caret"></span></a>
-					<ul class="dropdown-menu">
-						<li><a href="#">이름 오름차순</a></li>
-						<li><a href="#">이름 내림차순</a></li>
-						<li><a href="#">날짜 오름차순</a></li>
-						<li><a href="#">날짜 내림차순</a></li>
-					</ul></li>
+				<form method="post" action="fileUpload.pd"
+					enctype="multipart/form-data">
+					<li role="presintation"><input type="file" id="files"
+						name="files" onchange="$(this).parents('form').submit()" />
+						<button id="btn-upload" class="btn btn-primary">파일 올리기</button></li>
+					<li role="presintation"><a href="#">파일 내리기</a></li>
+
+					<li role="presintation"><a href="#">삭제</a></li>
+					<li class="dropdown"><a href="#" class="dropdown-toggle"
+						data-toggle="dropdown" role="button" aria-haspopup="true"
+						aria-expanded="false">정렬 <span class="caret"></span></a>
+						<ul class="dropdown-menu">
+							<li><a href="#">이름 오름차순</a></li>
+							<li><a href="#">이름 내림차순</a></li>
+							<li><a href="#">날짜 오름차순</a></li>
+							<li><a href="#">날짜 내림차순</a></li>
+						</ul></li>
+				</form>
 			</ul>
 		</nav>
 		<h5 class="text-muted">홈 > 폴더이름</h5>
@@ -42,21 +53,21 @@
 			</thead>
 			<tbody>
 				<c:forEach var="pr" items="${pr}">
-						<c:choose>
-							<c:when test="${pr.folder_id!=pr.parent_id}">
-								<tr data-url="fileList.pd?fd_id=${pr.folder_id }">
-									<td>
-										<div class="checkbox"
-											style="margin-top: 0px; margin-bottom: 0px;">
-											<label><input type="checkbox"></label>
-										</div>
-									</td>
-									<td>${pr.folder_name}</td>
-									<td>미정</td>
-								</tr>
-							</c:when>
-						</c:choose>
-				
+					<c:choose>
+						<c:when test="${pr.folder_id!=pr.parent_id}">
+							<tr data-url="fileList.pd?fd_id=${pr.folder_id }">
+								<td>
+									<div class="checkbox"
+										style="margin-top: 0px; margin-bottom: 0px;">
+										<label><input type="checkbox"></label>
+									</div>
+								</td>
+								<td>${pr.folder_name}</td>
+								<td>미정</td>
+							</tr>
+						</c:when>
+					</c:choose>
+
 				</c:forEach>
 			</tbody>
 		</table>

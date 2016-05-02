@@ -18,10 +18,19 @@
 		<put-attribute name="footer" value="/WEB-INF/views/include/footer.jsp" />
 	</definition>
 
+	<definition name="popupLayout" template="/WEB-INF/views/template3.jsp">
+		<put-attribute name="head" value="/WEB-INF/views/include/head.jsp" />
+		<put-attribute name="content3" value="" />
+	</definition>
+
 	<definition name="pdrive/*" extends="driveLayout">
 		<put-attribute name="content2" value="/WEB-INF/views/pdrive/{1}.jsp" />
 	</definition>
-
+	
+	<definition name="popup/*" extends="popupLayout">
+		<put-attribute name="content3" value="/WEB-INF/views/popup/{1}.jsp" />
+	</definition>
+	
 	<definition name="*/*" extends="commonLayout">
 		<put-attribute name="content" value="/WEB-INF/views/{1}/{2}.jsp" />
 	</definition>

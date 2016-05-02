@@ -34,9 +34,9 @@
     <bean id="myDataSource1"
         class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
         <property name="driverClass" value="com.microsoft.sqlserver.jdbc.SQLServerDriver" />
-        <property name="url" value="jdbc:sqlserver://127.0.0.1;databaseName=skhudb;" />
-        <property name="username" value="sa" />
-        <property name="password" value="!q@w#e$r" />
+        <property name="url" value="jdbc:sqlserver://211.35.76.106;databaseName=p_drive;" />
+        <property name="username" value="client" />
+        <property name="password" value="jazz991" />
     </bean>
 
     <bean id="sqlSessionFactory1" class="org.mybatis.spring.SqlSessionFactoryBean">

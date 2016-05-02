@@ -3,25 +3,27 @@
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-
-
-<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main" style="margin-left: 0px;">
+<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main"
+	style="margin-left: 0px;">
 	<div class="header clearfix" style="margin-top: 0px;">
 		<nav>
 			<ul class="nav nav-pills pull-right">
-				<li role="presintation"><a href="#" onclick="createFdPopup(${drive_id},'/pdrive/createFolder');">폴더생성</a></li>
-				<li role="presintation"><a href="#">파일 올리기</a></li>
-				<li role="presintation"><a href="#">파일 내리기</a></li>
-				<li role="presintation"><a href="#">삭제</a></li>
-				<li class="dropdown"><a href="#" class="dropdown-toggle"
-					data-toggle="dropdown" role="button" aria-haspopup="true"
-					aria-expanded="false">정렬 <span class="caret"></span></a>
-					<ul class="dropdown-menu">
-						<li><a href="#">이름 오름차순</a></li>
-						<li><a href="#">이름 내림차순</a></li>
-						<li><a href="#">날짜 오름차순</a></li>
-						<li><a href="#">날짜 내림차순</a></li>
-					</ul></li>
+				<c:forEach var="drive" items="${main}">
+					<li role="presintation"><a href="#" onload="createFdPopup()"
+						onclick="createFdPopup(${drive.drive_id})">폴더생성</a></li>
+					<li role="presintation"><a href="#">파일 올리기</a></li>
+					<li role="presintation"><a href="#">파일 내리기</a></li>
+					<li role="presintation"><a href="#">삭제</a></li>
+					<li class="dropdown"><a href="#" class="dropdown-toggle"
+						data-toggle="dropdown" role="button" aria-haspopup="true"
+						aria-expanded="false">정렬 <span class="caret"></span></a>
+						<ul class="dropdown-menu">
+							<li><a href="#">이름 오름차순</a></li>
+							<li><a href="#">이름 내림차순</a></li>
+							<li><a href="#">날짜 오름차순</a></li>
+							<li><a href="#">날짜 내림차순</a></li>
+						</ul></li>
+				</c:forEach>
 			</ul>
 		</nav>
 		<h5 class="text-muted">홈 > 폴더이름</h5>
@@ -59,3 +61,4 @@
 		</table>
 	</div>
 </div>
+<div id="popupCreate" style="display: none;"></div>
