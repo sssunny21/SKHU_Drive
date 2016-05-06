@@ -53,20 +53,21 @@ public class DriveController {
 	}
 	
 	@RequestMapping(value="/popup/createFolder.pd",method = RequestMethod.GET)
-	public String createFolder(@RequestParam("dr_id") int dr_id,Model model){
-		model.addAttribute("drive_id", dr_id);
+	public String createFolder(@RequestParam("dr_id") Integer dr_id,Model model){
+		Folder folder = driveMapper.selectBydr_id(dr_id);
+		model.addAttribute("folder", folder);
 		return "popup/createFolder";
 	}
 	
 	@RequestMapping(value="/popup/createFolder.pd",method = RequestMethod.POST)
 	public String createFolder(Folder folder,Model model) throws Exception {
-		String message = driveService.validateBeforeInsert(folder);
+		String message = driveService.validatepw(folder);
 		if (message == null){
-			folder.setDrive_id(folder.drive_id);
-			driveMapper.insert_folder(folder);
+			driveMapper.insert_sfolder(folder);
 			model.addAttribute("successMsg", "저장했습니다.");
 		}else{
-			model.addAttribute("errorMsg", message);
+			driveMapper.insert_folder(folder);
+			model.addAttribute("successMsg", "저장했습니다.");
 		}
 		return "popup/createFolder";
 	}

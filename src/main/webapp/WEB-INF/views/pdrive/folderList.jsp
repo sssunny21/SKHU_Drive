@@ -8,9 +8,10 @@
 	<div class="header clearfix" style="margin-top: 0px;">
 		<nav>
 			<ul class="nav nav-pills pull-right">
-				<c:forEach var="dr1" items="${dr1}">
+				<c:forEach var="dr1" items="${dr1}" begin="1" end="1">
 					<li role="presintation"><a href="#" onload="createFdPopup()"
 						onclick="createFdPopup(${dr1.drive_id})">폴더생성</a></li>
+				</c:forEach>
 					<li role="presintation"><a href="#">파일 올리기</a></li>
 					<li role="presintation"><a href="#">파일 내리기</a></li>
 					<li role="presintation"><a href="#">삭제</a></li>
@@ -23,7 +24,7 @@
 							<li><a href="#">날짜 오름차순</a></li>
 							<li><a href="#">날짜 내림차순</a></li>
 						</ul></li>
-				</c:forEach>
+				
 			</ul>
 		</nav>
 		<h5 class="text-muted">홈 > 폴더이름</h5>

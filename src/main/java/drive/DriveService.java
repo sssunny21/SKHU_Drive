@@ -11,10 +11,10 @@ public class DriveService {
 	@Autowired
 	DriveMapper driveMapper;
 	
-	public String validateBeforeInsert(Folder folder) throws Exception {
-        String s = folder.getFolder_name();
+	public String validatepw(Folder folder) throws Exception {
+        String s = folder.getSfolder_pw();
         if (StringUtils.isBlank(s))
-            return "폴더 이름을 입력하세요.";
+            return "비밀번호를 입력해주세요.";
 
         return null;
     }

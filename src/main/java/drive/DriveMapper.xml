@@ -16,8 +16,8 @@
 	</select>
 	<select id="selectBydr_id" resultType="drive.Folder">
 		SELECT *
-		FROM folder
-		WHERE drive_id=#{drive_id}
+		FROM drive
+		WHERE drive_id=#{dr_id}
 	</select>
 	<select id="selectBydr_id1" resultType="drive.Folder">
 		SELECT
