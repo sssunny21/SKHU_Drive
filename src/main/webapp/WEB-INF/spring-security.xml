@@ -7,7 +7,7 @@
     http://www.springframework.org/schema/security/spring-security-3.2.xsd">
 
     <http auto-config="true">
-        <intercept-url pattern="/user/*" access="ROLE_4" />
+        <intercept-url pattern="/user/*" access="ROLE_1" />
  
         <form-login
             login-page="/home/login.pd"
@@ -21,7 +21,7 @@
             logout-success-url="/home/login.pd"
             invalidate-session="true" />
     </http>
-
+	
     <authentication-manager>
         <authentication-provider ref="myAuthenticationProvider"/>
     </authentication-manager>

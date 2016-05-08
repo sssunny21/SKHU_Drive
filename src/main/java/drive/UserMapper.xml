@@ -13,6 +13,10 @@
 		SELECT * FROM [users] WHERE
 		u_id=#{u_id}
 	</select>
+	
+	<select id="selectProfessor" resultType="drive.Drive">
+		SELECT * FROM [professor] WHERE d_id=#{d_id}
+	</select>
 
 	<select id="selectAll" resultType="drive.User">
 		SELECT * FROM [users]

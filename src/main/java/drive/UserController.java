@@ -24,6 +24,11 @@ public class UserController {
 		}
 		return "home/join";
 	}
+	
+	@RequestMapping("/user/mypage.pd")
+    public String mypage(Model model) {
+        return "user/mypage";
+    }
 
 	@RequestMapping(value="/user/myinfo.pd", method = RequestMethod.GET)
 	public String myinfo(@RequestParam("id") Integer id, Model model) {

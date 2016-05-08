@@ -9,7 +9,7 @@
 </head>
 <body>
 	<tiles:insertAttribute name="menu"/>
-	<div class="container">
+	<div class="container" style="margin-left: 0px;">
 		<tiles:insertAttribute name="content" />
 		
 		<c:if test="${ not empty errorMsg }">

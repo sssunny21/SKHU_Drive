@@ -9,7 +9,7 @@
 		</div>
 		<div class="callapse navbar-collapse">
 			<ul class="nav navbar-nav">
-				<li><a href="/drive/pdrive/main.pd?id2=1">P_Drive</a>
+				<li><a href="/drive/pdrive/main.pd">P_Drive</a>
 				<li><a href="#">Google_Drive</a>
 				<li><a href="#">One_Drive</a>
 				<li><sec:authorize access="not authenticated">
@@ -21,7 +21,7 @@
 					<li><a href="/drive/home/login.pd">로그인</a></li>
 				</sec:authorize>
 				<sec:authorize access="authenticated">
-					<li><a href="drive/user/myinfo.pd?id=10">정보수정 </a></li>
+				<li><a href="/drive/user/mypage.pd">마이페이지 </a></li>
 				<li><a href="/drive/home/logout.pd">로그아웃</a></li>
 				</sec:authorize>
 			</ul>

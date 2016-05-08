@@ -71,19 +71,6 @@ public class DriveController {
 		}
 		return "popup/createFolder";
 	}
-	/**
-	@RequestMapping(value="/popup/createFolder.pd" ,method = RequestMethod.POST)
-	public String createFolder(Folder folder, Model model) throws Exception{
-		String message = driveService.validateBeforeInsert(folder);
-		if (message == null){
-			driveMapper.insert_folder(folder);
-			model.addAttribute("successMsg", "저장했습니다.");
-		}else{
-			model.addAttribute("errorMsg", message);
-		}
-		return "popup/createFolder";
-	}
-	**/
 
 	@RequestMapping(value = "/pdrive/fileUpload.pd", method = RequestMethod.POST)
 	public String upload(@RequestParam("files") MultipartFile uploadedFile) throws IOException {

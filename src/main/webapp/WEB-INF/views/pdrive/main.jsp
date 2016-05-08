@@ -8,7 +8,7 @@
 	<div class="header clearfix" style="margin-top: 0px;">
 		<nav>
 			<ul class="nav nav-pills pull-right">
-				<c:forEach var="drive" items="${main}">
+				<c:forEach var="drive" items="${main}" begin="1" end="1">
 					<li role="presintation"><a href="#" onload="createFdPopup()"
 						onclick="createFdPopup(${drive.drive_id})">폴더생성</a></li>
 					<li role="presintation"><a href="#">파일 올리기</a></li>

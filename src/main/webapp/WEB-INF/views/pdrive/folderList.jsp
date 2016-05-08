@@ -12,6 +12,7 @@
 					<li role="presintation"><a href="#" onload="createFdPopup()"
 						onclick="createFdPopup(${dr1.drive_id})">폴더생성</a></li>
 				</c:forEach>
+					<li role="presintation">즐겨찾기</li>
 					<li role="presintation"><a href="#">파일 올리기</a></li>
 					<li role="presintation"><a href="#">파일 내리기</a></li>
 					<li role="presintation"><a href="#">삭제</a></li>
@@ -50,9 +51,8 @@
 						<c:when test="${dr1.parent_id==0}">
 							<tr data-url="folderList2.pd?parent_id=${dr1.folder_id}">
 								<td>
-									<div class="checkbox"
-										style="margin-top: 0px; margin-bottom: 0px;">
-										<label><input type="checkbox"></label>
+									<div class="checkbox" style="margin-top: 0px; margin-bottom: 0px;">
+										<label><input type="checkbox" id="folderselect"></label>
 									</div>
 								</td>
 								<td>${dr1.folder_name}</td>
