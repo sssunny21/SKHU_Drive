@@ -55,7 +55,7 @@
 				<c:forEach var="pr" items="${pr}">
 					<c:choose>
 						<c:when test="${pr.folder_id!=pr.parent_id}">
-							<tr data-url="fileList.pd?fd_id=${pr.folder_id }">
+							<tr data-url="folderList2.pd?fd_id=${pr.folder_id}">
 								<td>
 									<div class="checkbox"
 										style="margin-top: 0px; margin-bottom: 0px;">
@@ -68,6 +68,37 @@
 						</c:when>
 					</c:choose>
 
+				</c:forEach>
+			</tbody>
+		</table>
+	</div>
+	<div class="table-responsive">
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>
+						<div class="checkbox" style="margin-top: 0px; margin-bottom: 0px;">
+							<label><input type="checkbox"></label>
+						</div>
+					</th>
+					<th>파일 이름</th>
+					<th>파일 사이즈</th>
+					<th>파일 생성일</th>
+				</tr>
+			</thead>
+			<tbody>
+				<c:forEach var="fd" items="${fd}">
+					<tr data-url="#">
+						<td>
+							<div class="checkbox"
+								style="margin-top: 0px; margin-bottom: 0px;">
+								<label><input type="checkbox"></label>
+							</div>
+						</td>
+						<td>${fd.files_name}</td>
+						<td>${fd.files_size}</td>
+						<td>${fd.files_date}</td>
+					</tr>
 				</c:forEach>
 			</tbody>
 		</table>

@@ -14,6 +14,8 @@ public class User {
 	String u_apw;
 	int u_auth;
 	int d_id;
+	int join_id;
+	int folder_id;
 
 	public static String encryptPasswd(String u_pw) {
 		try {
@@ -107,5 +109,20 @@ public class User {
 
 	public void setD_id(int d_id) {
 		this.d_id = d_id;
+	}
+	public int getJoin_id() {
+		return join_id;
+	}
+
+	public void setJoin_id(int join_id) {
+		this.join_id = join_id;
+	}
+
+	public int getFolder_id() {
+		return folder_id;
+	}
+
+	public void setFolder_id(int folder_id) {
+		this.folder_id = folder_id;
 	}
 }

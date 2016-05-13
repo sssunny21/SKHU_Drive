@@ -17,14 +17,15 @@
 	<select id="selectBydr_id" resultType="drive.Folder">
 		SELECT *
 		FROM drive
-		WHERE drive_id=#{dr_id}
+		WHERE
+		drive_id=#{dr_id}
 	</select>
 	<select id="selectBydr_id1" resultType="drive.Folder">
 		SELECT
 		folder_id,folder_name,drive_id,parent_id
 		FROM folder
 		WHERE
-		drive_id=#{dr_id}
+		drive_id=#{dr_id} AND parent_id IS NULL
 	</select>
 
 	<select id="selectBydr_id2" resultType="drive.Folder">
@@ -52,13 +53,15 @@
 	<insert id="insert_folder" useGeneratedKeys="true" keyProperty="id">
 		INSERT
 		INTO [folder] (folder_name, drive_id, parent_id)
-		VALUES (#{folder_name},#{drive_id}, null)
+		VALUES
+		(#{folder_name},#{drive_id}, null)
 	</insert>
 
 	<insert id="insert_sfolder" useGeneratedKeys="true" keyProperty="id">
 		INSERT
 		INTO [share_folder] (sfolder_name, drive_id, sfolder_pw)
-		VALUES (#{sfolder_name},#{drive_id},#{sfolder_pw})
+		VALUES
+		(#{sfolder_name},#{drive_id},#{sfolder_pw})
 	</insert>
 
 	<insert id="insert_files" useGeneratedKeys="true" keyProperty="id">
@@ -68,7 +71,12 @@
 		VALUES (#{files_name},#{files_size},
 		GETDATE(),#{folder_id}, #{data})
 	</insert>
-
+	<insert id="insert_favorites" useGeneratedKeys="true" keyProperty="id">
+		INSERT
+		INTO [my_join_folder] (id, folder_id)
+		VALUES
+		(#{id},#{folder_id})
+	</insert>
 	<delete id="delete">
 		DELETE [files] WHERE [f_id] = #{f_id}
 	</delete>

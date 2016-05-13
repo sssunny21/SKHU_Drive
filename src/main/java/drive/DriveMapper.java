@@ -13,5 +13,6 @@ public interface DriveMapper {
 	void insert_folder(Folder folder);
 	void insert_sfolder(Folder folder);
 	void insert_files(Files files);
+	void insert_favorites(int id, int[] folder_id);
 	void delete(int f_id);
 }

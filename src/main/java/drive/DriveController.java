@@ -19,6 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 public class DriveController {
 	@Autowired DriveMapper driveMapper;
 	@Autowired DriveService driveService;
+	@Autowired UserService userService;
 
 	@RequestMapping(value="/pdrive/main.pd" ,method = RequestMethod.GET)
 	public String main(@RequestParam("id2") int id2,Model model) {
@@ -36,22 +37,38 @@ public class DriveController {
 		return "pdrive/folderList";
 	}
 	
+	@RequestMapping(value="/pdrive/folderList.pd",method = RequestMethod.POST,params="cmd=saveFavorites")
+	public String saveFavorites(@RequestParam("dr_id") int dr_id,@RequestParam("folder_id") int[] folder_id,Model model) {
+		User u = (User)userService.getCurrentUser();
+		driveMapper.insert_favorites(u.id,folder_id);
+		System.out.println(folder_id);
+		List<Folder> dr1 = driveMapper.selectBydr_id1(dr_id);
+		List<Folder> dr2 = driveMapper.selectBydr_id2(dr_id);
+		model.addAttribute("dr1", dr1);
+		model.addAttribute("dr2", dr2);
+		return "pdrive/folderList";
+	}
+	
 	@RequestMapping(value="/pdrive/folderList2.pd" ,method = RequestMethod.GET)
-	public String folderlist2(@RequestParam("parent_id") int parent_id,Model model) {
-		List<Drive> pr = driveMapper.selectBypr_id(parent_id);
+	public String folderlist2(@RequestParam("fd_id") int fd_id,Model model) {
+		List<Drive> pr = driveMapper.selectBypr_id(fd_id);
 		List<Drive> all = driveMapper.selectFolderAll();
 		model.addAttribute("pr", pr);
 		model.addAttribute("all",all);
+		
+		List<Drive> fd = driveMapper.selectByf_id(fd_id);
+		model.addAttribute("fd", fd);
 		return "pdrive/folderList2";
 	}
 	
+	/**
 	@RequestMapping(value="/pdrive/fileList.pd" ,method = RequestMethod.GET)
 	public String filelist(@RequestParam("fd_id") int fd_id,Model model) {
 		List<Drive> fd = driveMapper.selectByf_id(fd_id);
 		model.addAttribute("fd", fd);
 		return "pdrive/fileList";
 	}
-	
+	**/
 	@RequestMapping(value="/popup/createFolder.pd",method = RequestMethod.GET)
 	public String createFolder(@RequestParam("dr_id") Integer dr_id,Model model){
 		Folder folder = driveMapper.selectBydr_id(dr_id);
