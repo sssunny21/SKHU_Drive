@@ -12,6 +12,9 @@
 		$("tbody tr").click(function(){
 			location.href=$(this).attr("data-url");
 		});
+		$('td:first-child').click((function(event){
+	         event.stopPropagation();
+	      }));
 		
 		$('#share_tn').click(function(){
 			$("#share_t").toggle();

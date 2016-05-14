@@ -12,6 +12,7 @@ public class Pagination {
 	int srchType;
 	String srchText="";
 	int recordCount;
+	
 
 	public int getCurrentPage() {
 		return currentPage;
@@ -28,16 +29,16 @@ public class Pagination {
 	public void setPageSize(int pageSize) {
 		this.pageSize = pageSize;
 	}
-	
+
 	public int getOrder() {
-        return order;
-    }
+		return order;
+	}
 
-    public void setOrder(int order) {
-        this.order = order;
-    }
+	public void setOrder(int order) {
+		this.order = order;
+	}
 
-	
+
 	public int getSrchType() {
 		return srchType;
 	}
@@ -79,14 +80,14 @@ public class Pagination {
 	public void setSz(int pageSize) {
 		this.pageSize = pageSize;
 	}
-	
-	public int getOd() {
-        return order;
-    }
 
-    public void setOd(int order) {
-        this.order = order;
-    }
+	public int getOd() {
+		return order;
+	}
+
+	public void setOd(int order) {
+		this.order = order;
+	}
 
 	public int getSs() {
 		return srchType;
@@ -103,12 +104,12 @@ public class Pagination {
 	public void setSt(String srchText) {
 		this.srchText = srchText;
 	}
-	
-	  /* 멤버 변수 값들을 query string으로 출력하기 위한 메소드 */
-    public String getQueryString() throws UnsupportedEncodingException {
-        String temp = (srchText == null) ? "" : URLEncoder.encode(srchText, "UTF-8"); 
-        return String.format("pg=%d&sz=%d&od=%d&ss=%d&st=%s", currentPage, pageSize,order,srchType, temp);
-    }
+
+	/* 멤버 변수 값들을 query string으로 출력하기 위한 메소드 */
+	public String getQueryString() throws UnsupportedEncodingException {
+		String temp = (srchText == null) ? "" : URLEncoder.encode(srchText, "UTF-8"); 
+		return String.format("pg=%d&sz=%d&od=%d&ss=%d&st=%s", currentPage, pageSize, order, srchType,temp);
+	}
 
 
 	/* 화면 하단에 페이지 번호 링크들을 출력하기 위한 메소드와 클래스 */

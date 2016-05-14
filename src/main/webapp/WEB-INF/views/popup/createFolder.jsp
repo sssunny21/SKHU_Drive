@@ -27,12 +27,13 @@ div {
 		<br>
 	</div>
 	<form:hidden path="drive_id" />
-
+	
 	<div id="share_t">
-		<label>폴더 이름 </label>
-		<form:input path="sfolder_name" />
-		<br> <label>폴더 암호 </label>
-		<form:input path="sfolder_pw" />
+	<label>폴더 이름 </label>
+	<form:input path="sfolder_name" />
+	<br>
+	<label>폴더 암호 </label>
+	<form:input path="sfolder_pw"/>
 	</div>
 	<div>
 		<input type="submit" class="btn btn-primary" value="만들기" /> <input

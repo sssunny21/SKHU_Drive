@@ -6,6 +6,7 @@
 	label {margin-top:10px;}
 </style>
     <h1>회원가입</h1>
+
     <form:form method="post" modelAttribute="user">
         <label>학번 </label>
        	 	<form:input path="u_id" />

@@ -14,4 +14,15 @@ public interface DriveMapper {
 	void insert_sfolder(Folder folder);
 	void insert_files(Files files);
 	void delete(int f_id);
+	
+	
+	void insert_favorites(int id, int[] folder_id);
+	
+	//파일
+	int selectCount();
+	List<Drive> selectPage(Pagination pagination);
+	
+	//폴더
+	int selectCount2();
+	List<Drive> selectPage2(Pagination pagination);
 }

@@ -6,30 +6,30 @@
 
 <sec:authorize access="authenticated">
 	<table class="table table-bordered" style="width: 500px;">
+		<tr>
+         <td>로그인ID</td>
+         <td><sec:authentication property="professor.p_id" /></td>
+      </tr>
       <tr>
          <td>이름</td>
-         <td><sec:authentication property="user.u_name" /></td>
+         <td><sec:authentication property="professor.p_name" /></td>
       </tr>
 
       <tr>
          <td>이메일</td>
-         <td><sec:authentication property="user.u_email" /></td>
+         <td><sec:authentication property="professor.p_email" /></td>
       </tr>
       <tr>
          <td>전화번호</td>
-         <td><sec:authentication property="user.u_tel" /></td>
+         <td><sec:authentication property="professor.p_tel" /></td>
       </tr>
-      <tr>
-         <td>학년</td>
-         <td><sec:authentication property="user.u_grade" /></td>
-      </tr>
+  
       <tr>
          <td>학과</td>
-         <td><sec:authentication property="user.d_id" /></td>
+         <td><sec:authentication property="professor.d_id2" /></td>
       </tr>
       
 	</table>
 	<a href="/drive/user/myinfo_edit.pd" class="btn btn-primary">개인정보 수정</a>
-	<a href="/drive/user/myinfo_pw.pd" class="btn btn-primary">비밀번호 변경</a>
 </sec:authorize>
 
