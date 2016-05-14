@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+             "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="drive.ProfessorMapper">
+
+	<select id="selectByPId" resultType="drive.Professor">
+		SELECT * FROM [professor] WHERE
+		id2=#{id2}
+	</select>
+
+	<select id="selectByP_id" resultType="drive.Professor">
+		SELECT * FROM [professor] WHERE
+		p_id=#{p_id}
+	</select>
+
+	<select id="selectAll" resultType="drive.Professor">
+		SELECT * FROM [professor]
+	</select>
+
+
+	<insert id="insertP" useGeneratedKeys="true" keyProperty="id2">
+		INSERT
+		[professor]
+		(p_id,p_pw,p_name,p_tel,p_email,p_qpw,p_aqw,p_code,d_id)
+		VALUES
+		(#{p_id},#{p_pw},#{p_name},#{p_tel},#{p_email},#{p_qpw},#{p_aqw},1,#{d_id})
+	</insert>
+
+	<update id="updateP">
+		UPDATE [professor] SET
+		p_id = #{p_id},
+		p_name = #{p_name},
+		p_tel = #{p_tel},
+		p_email = #{p_email},
+		p_qpw = #{p_qpw},
+		p_aqw = #{p_aqw},
+		p_code = #{p_code},
+		d_id = #{d_id}
+		WHERE id2 =#{id2}
+	</update>
+
+	<update id="professor_update">
+		UPDATE [professor] SET
+		p_pw = #{p_pw},
+		p_name = #{p_name},
+		p_tel = #{p_tel},
+		p_email = #{p_email},
+		p_qpw = #{p_qpw},
+		p_aqw = #{p_aqw},
+		d_id = #{d_id}
+		WHERE id2 =#{id2}
+	</update>
+
+
+	<delete id="deleteP">
+		DELETE FROM [professor] WHERE id2 = #{id2}
+	</delete>
+	
+	
+	<select id="selectPage1" resultType="drive.Professor">
+        <![CDATA[
+        SELECT * FROM 
+        (SELECT id2,p_id,p_name,p_email,p_tel,d_id,
+        CASE #{order}
+            WHEN 0 THEN ROW_NUMBER() OVER (ORDER BY p_id asc)
+            WHEN 1 THEN ROW_NUMBER() OVER (ORDER BY p_id desc)
+            WHEN 2 THEN ROW_NUMBER() OVER (ORDER BY p_name asc)
+            WHEN 3 THEN ROW_NUMBER() OVER (ORDER BY p_name desc)
+        END 행번호
+        FROM [professor]
+        WHERE
+        	(#{srchType}=0)OR
+        	(#{srchType}=1 AND CHARINDEX(#{srchText},p_id)>0)OR
+        	(#{srchType}=2 AND CHARINDEX(#{srchText},p_name)=1)OR
+        	(#{srchType}=3 AND #{srchText}=d_id)
+        	)subquery
+        WHERE 행번호 > (#{currentPage} - 1) * #{pageSize} AND 행번호 <= #{currentPage} * #{pageSize}
+        ORDER BY 행번호
+        ]]>
+	</select>
+
+	<select id="selectCount1" resultType="int">
+		SELECT COUNT(*)
+		FROM [professor]
+		WHERE
+		(#{srchType}=0)OR
+		(#{srchType}=1 AND
+		CHARINDEX(#{srchText},p_id)>0)OR
+		(#{srchType}=2 AND
+		CHARINDEX(#{srchText},p_name)=1)OR
+		(#{srchType}=3 AND
+		 #{srchText}=d_id)
+	</select>
+
+	
+</mapper>
