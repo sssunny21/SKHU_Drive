@@ -9,7 +9,7 @@
 </head>
 <body>
 	<tiles:insertAttribute name="menu" />
-	<div class="container" style="margin-left: 0px;">
+	<div class="container">
 		<div class="row">
 			<tiles:insertAttribute name="sidebar" />
 			<tiles:insertAttribute name="content2" />

@@ -11,11 +11,7 @@
 
 	<select id="selectByU_id" resultType="drive.User">
 		SELECT * FROM [users] WHERE
-		u_id=#{u_id}
-	</select>
-	
-	<select id="selectProfessor" resultType="drive.Drive">
-		SELECT * FROM [professor] WHERE d_id=#{d_id}
+		u_id = #{u_id}
 	</select>
 
 	<select id="selectAll" resultType="drive.User">
@@ -25,7 +21,7 @@
 	<select id="selectPage" resultType="drive.User">
         <![CDATA[
         SELECT * FROM 
-        (SELECT id,u_id,u_name,u_birth,u_tel,u_group,
+        (SELECT id,u_id,u_name,u_email,u_tel,u_grade,
         CASE #{order}
             WHEN 0 THEN ROW_NUMBER() OVER (ORDER BY u_id)
             WHEN 1 THEN ROW_NUMBER() OVER (ORDER BY u_name)
@@ -35,7 +31,7 @@
         	(#{srchType}=0)OR
         	(#{srchType}=1 AND CHARINDEX(#{srchText},u_id)>0)OR
         	(#{srchType}=2 AND CHARINDEX(#{srchText},u_name)>0)OR
-        	(#{srchType}=3 AND #{srchText}=u_auth)
+        	(#{srchType}=3 AND #{srchText}=u_grade)
         	)subquery
         WHERE 행번호 > (#{currentPage} - 1) * #{pageSize} AND 행번호 <= #{currentPage} * #{pageSize}
         ORDER BY 행번호
@@ -47,46 +43,67 @@
 		FROM [users]
 		WHERE
 		(#{srchType}=0)OR
-		(#{srchType}=1 AND CHARINDEX(#{srchText},u_id)>0)OR
-		(#{srchType}=2 AND CHARINDEX(#{srchText},u_name)>0)OR
-		(#{srchType}=3 AND #{srchText}=u_auth)
+		(#{srchType}=1 AND
+		CHARINDEX(#{srchText},u_id)>0)OR
+		(#{srchType}=2 AND
+		CHARINDEX(#{srchText},u_name)=1)OR
+		(#{srchType}=3 AND
+		#{srchText}=u_grade)
 	</select>
 
 
 	<insert id="insert" useGeneratedKeys="true" keyProperty="id">
 		INSERT
-		[users] (u_id,u_pw,u_name,u_tel,u_email,u_grade,u_qpw,u_apw,u_auth,d_id)
-		VALUES (#{u_id},#{u_pw},#{u_name},#{u_tel},#{u_email},#{u_grade},#{u_qpw},#{u_apw},1,#{d_id})
+		[users]
+		(u_id,u_pw,u_name,u_tel,u_email,u_grade,u_qpw,u_apw,u_auth,d_id)
+		VALUES
+		(#{u_id},#{u_pw},#{u_name},#{u_tel},#{u_email},#{u_grade},#{u_qpw},#{u_apw},1,#{d_id})
 	</insert>
 
 	<update id="update">
 		UPDATE [users] SET
-		u_id = #{u_id},
 		u_name = #{u_name},
-		u_email = #{u_email},
+		u_email =
+		#{u_email},
 		u_tel = #{u_tel},
-		u_auth = #{u_auth},
+		u_auth =
+		#{u_auth},
 		u_qpw = #{u_qpw},
-		u_apw = #{u_apw},
+		u_apw =
+		#{u_apw},
 		u_grade = #{u_grade},
-		d_id = #{d_id}
+		d_id
+		= #{d_id}
 		WHERE id =#{id}
 	</update>
 
 	<update id="user_update">
 		UPDATE [users] SET
-		u_id = #{u_id},
 		u_name = #{u_name},
+		u_pw = #{u_pw},
 		u_email = #{u_email},
 		u_tel = #{u_tel},
 		u_qpw = #{u_qpw},
-		u_apw = #{u_apw},
+		u_apw =
+		#{u_apw},
 		u_grade = #{u_grade},
 		d_id = #{d_id}
 		WHERE id = #{id}
 	</update>
 
+	<update id="updatePW">
+		UPDATE [users] SET
+		u_pw = #{u_pw}
+		WHERE id=#{id} AND u_email=#{u_email}
+	</update>
+
 	<delete id="delete">
 		DELETE FROM [users] WHERE id = #{id}
 	</delete>
+	
+	 <select id="selectProfessor" resultType="drive.Drive">
+      SELECT * FROM [professor] WHERE d_id=#{d_id}
+   </select>
+
+	
 </mapper>

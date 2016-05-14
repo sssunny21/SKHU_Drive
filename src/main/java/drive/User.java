@@ -2,6 +2,7 @@ package drive;
 
 import java.security.MessageDigest;
 
+
 public class User {
 	int id;
 	String u_id;
@@ -14,9 +15,9 @@ public class User {
 	String u_apw;
 	int u_auth;
 	int d_id;
-	int join_id;
-	int folder_id;
+	
 
+    
 	public static String encryptPasswd(String u_pw) {
 		try {
 			MessageDigest md = MessageDigest.getInstance("SHA1");
@@ -30,7 +31,7 @@ public class User {
 			return u_pw;
 		}
 	}
-	
+
 	public int getId() {
 		return id;
 	}
@@ -46,7 +47,6 @@ public class User {
 	public String getU_pw() {
 		return u_pw;
 	}
-
 	public void setU_pw(String u_pw) {
 		this.u_pw = encryptPasswd(u_pw);
 	}
@@ -56,7 +56,7 @@ public class User {
 	public void setU_name(String u_name) {
 		this.u_name = u_name;
 	}
-	
+
 	public String getU_tel() {
 		return u_tel;
 	}
@@ -110,19 +110,15 @@ public class User {
 	public void setD_id(int d_id) {
 		this.d_id = d_id;
 	}
-	public int getJoin_id() {
-		return join_id;
-	}
 
-	public void setJoin_id(int join_id) {
-		this.join_id = join_id;
-	}
 
-	public int getFolder_id() {
-		return folder_id;
-	}
+	String u_email2; 
 
-	public void setFolder_id(int folder_id) {
-		this.folder_id = folder_id;
-	}
+    public String getU_email2() {
+        return u_email2;
+    }
+    public void setU_email2(String u_email2) {
+        this.u_email2 = u_email2;
+    }
+    
 }

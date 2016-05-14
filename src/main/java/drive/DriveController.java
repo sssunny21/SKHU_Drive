@@ -27,7 +27,7 @@ public class DriveController {
 		model.addAttribute("main", drive);
 		return "pdrive/main";
 	}
-	
+
 	@RequestMapping(value="/pdrive/folderList.pd" ,method = RequestMethod.GET)
 	public String folderlist(@RequestParam("dr_id") int dr_id,Model model) {
 		List<Folder> dr1 = driveMapper.selectBydr_id1(dr_id);
@@ -36,7 +36,7 @@ public class DriveController {
 		model.addAttribute("dr2", dr2);
 		return "pdrive/folderList";
 	}
-	
+
 	@RequestMapping(value="/pdrive/folderList.pd",method = RequestMethod.POST,params="cmd=saveFavorites")
 	public String saveFavorites(@RequestParam("dr_id") int dr_id,@RequestParam("folder_id") int[] folder_id,Model model) {
 		User u = (User)userService.getCurrentUser();
@@ -48,34 +48,34 @@ public class DriveController {
 		model.addAttribute("dr2", dr2);
 		return "pdrive/folderList";
 	}
-	
+
 	@RequestMapping(value="/pdrive/folderList2.pd" ,method = RequestMethod.GET)
 	public String folderlist2(@RequestParam("fd_id") int fd_id,Model model) {
 		List<Drive> pr = driveMapper.selectBypr_id(fd_id);
 		List<Drive> all = driveMapper.selectFolderAll();
 		model.addAttribute("pr", pr);
 		model.addAttribute("all",all);
-		
+
 		List<Drive> fd = driveMapper.selectByf_id(fd_id);
 		model.addAttribute("fd", fd);
 		return "pdrive/folderList2";
 	}
-	
+
 	/**
-	@RequestMapping(value="/pdrive/fileList.pd" ,method = RequestMethod.GET)
-	public String filelist(@RequestParam("fd_id") int fd_id,Model model) {
-		List<Drive> fd = driveMapper.selectByf_id(fd_id);
-		model.addAttribute("fd", fd);
-		return "pdrive/fileList";
-	}
-	**/
+   @RequestMapping(value="/pdrive/fileList.pd" ,method = RequestMethod.GET)
+   public String filelist(@RequestParam("fd_id") int fd_id,Model model) {
+      List<Drive> fd = driveMapper.selectByf_id(fd_id);
+      model.addAttribute("fd", fd);
+      return "pdrive/fileList";
+   }
+	 **/
 	@RequestMapping(value="/popup/createFolder.pd",method = RequestMethod.GET)
 	public String createFolder(@RequestParam("dr_id") Integer dr_id,Model model){
 		Folder folder = driveMapper.selectBydr_id(dr_id);
 		model.addAttribute("folder", folder);
 		return "popup/createFolder";
 	}
-	
+
 	@RequestMapping(value="/popup/createFolder.pd",method = RequestMethod.POST)
 	public String createFolder(Folder folder,Model model) throws Exception {
 		String message = driveService.validatepw(folder);
@@ -102,22 +102,22 @@ public class DriveController {
 		return "redirect:/pdrive/main.pd";
 	}
 	/**
-	@RequestMapping("/pdrive/fileDelete.pd")
-	public String delete(@RequestParam("id") int id) {
-		driveMapper.delete(id);
-		return "redirect:/pdrive/main.pd";
-	}
+   @RequestMapping("/pdrive/fileDelete.pd")
+   public String delete(@RequestParam("id") int id) {
+      driveMapper.delete(id);
+      return "redirect:/pdrive/main.pd";
+   }
 
-	@RequestMapping("/pdrive/fileDownload.pd")
-	public void download(@RequestParam("fd_id") int fd_id, HttpServletResponse response) throws IOException {
-		List<Drive> drive = driveMapper.selectById(fd_id);
-		String f_name = URLEncoder.encode(((Drive) drive).getF_name(),"UTF-8");
-		response.setContentType("application/octet-stream");
-		response.setHeader("Content-Disposition", "attachment;f_name=" + f_name + ";");
-		try (BufferedOutputStream output = new BufferedOutputStream(response.getOutputStream())) {
-			output.write(((Drive) drive).getData());
-		}
-	}
-	**/
+   @RequestMapping("/pdrive/fileDownload.pd")
+   public void download(@RequestParam("fd_id") int fd_id, HttpServletResponse response) throws IOException {
+      List<Drive> drive = driveMapper.selectById(fd_id);
+      String f_name = URLEncoder.encode(((Drive) drive).getF_name(),"UTF-8");
+      response.setContentType("application/octet-stream");
+      response.setHeader("Content-Disposition", "attachment;f_name=" + f_name + ";");
+      try (BufferedOutputStream output = new BufferedOutputStream(response.getOutputStream())) {
+         output.write(((Drive) drive).getData());
+      }
+   }
+	 **/
 
 }

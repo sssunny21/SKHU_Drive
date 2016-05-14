@@ -25,7 +25,7 @@
 		folder_id,folder_name,drive_id,parent_id
 		FROM folder
 		WHERE
-		drive_id=#{dr_id} AND parent_id IS NULL
+		drive_id=#{dr_id}
 	</select>
 
 	<select id="selectBydr_id2" resultType="drive.Folder">
@@ -50,6 +50,9 @@
 		WHERE
 		folder_id=#{folder_id}
 	</select>
+	
+	
+	
 	<insert id="insert_folder" useGeneratedKeys="true" keyProperty="id">
 		INSERT
 		INTO [folder] (folder_name, drive_id, parent_id)
@@ -71,12 +74,69 @@
 		VALUES (#{files_name},#{files_size},
 		GETDATE(),#{folder_id}, #{data})
 	</insert>
-	<insert id="insert_favorites" useGeneratedKeys="true" keyProperty="id">
+
+
+	<insert id="insert_favorites" useGeneratedKeys="true"
+		keyProperty="id">
 		INSERT
 		INTO [my_join_folder] (id, folder_id)
 		VALUES
 		(#{id},#{folder_id})
 	</insert>
+
+
+	<select id="selectPage" resultType="drive.Files">
+        <![CDATA[
+        SELECT * FROM 
+        (SELECT files_name,files_size,files_date,
+        CASE #{order}
+            WHEN 0 THEN ROW_NUMBER() OVER (ORDER BY files_name asc)
+            WHEN 1 THEN ROW_NUMBER() OVER (ORDER BY files_name desc)
+            WHEN 2 THEN ROW_NUMBER() OVER (ORDER BY files_date asc)
+            WHEN 3 THEN ROW_NUMBER() OVER (ORDER BY files_date desc)
+        END 행번호
+        FROM [files]
+        WHERE
+        	(#{srchType}=0)OR
+        	(#{srchType}=1 AND CHARINDEX(#{srchText},files_id)>0)OR
+        	(#{srchType}=2 AND CHARINDEX(#{srchText},files_name)>0)OR
+        	(#{srchType}=3 AND CHARINDEX(#{srchText},files_body)>0)
+        	)subquery
+        WHERE 행번호 > (#{currentPage} - 1) * #{pageSize} AND 행번호 <= #{currentPage} * #{pageSize}
+        ]]>
+	</select>
+
+	<select id="selectPage2" resultType="drive.Folder">
+        <![CDATA[
+        SELECT * FROM 
+        (SELECT folder_id,folder_name,
+        CASE #{order}
+            WHEN 0 THEN ROW_NUMBER() OVER (ORDER BY folder_id asc)
+            WHEN 1 THEN ROW_NUMBER() OVER (ORDER BY folder_id desc)
+            WHEN 2 THEN ROW_NUMBER() OVER (ORDER BY folder_name asc)
+            WHEN 3 THEN ROW_NUMBER() OVER (ORDER BY folder_name desc)
+        END 행번호
+        FROM [folder]
+        WHERE
+        	(#{srchType}=0)OR
+        	(#{srchType}=1 AND CHARINDEX(#{srchText},folder_id)>0)OR
+        	(#{srchType}=2 AND CHARINDEX(#{srchText},folder_name)>0)
+        	)subquery
+        WHERE 행번호 > (#{currentPage} - 1) * #{pageSize} AND 행번호 <= #{currentPage} * #{pageSize}
+        ]]>
+	</select>
+
+
+	<select id="selectCount" resultType="int"> SELECT COUNT(*) FROM
+		[files]
+	</select>
+
+	<select id="selectCount2" resultType="int"> SELECT COUNT(*) FROM
+		[folder]
+	</select>
+
+
+
 	<delete id="delete">
 		DELETE [files] WHERE [f_id] = #{f_id}
 	</delete>

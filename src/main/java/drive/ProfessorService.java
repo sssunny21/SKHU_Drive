@@ -6,110 +6,83 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
-import com.sun.xml.internal.bind.v2.runtime.output.StAXExStreamWriterOutput;
-
 @Service
-public class UserService {
+public class ProfessorService {
 
 	@Autowired
-	UserMapper userMapper;
+	ProfessorMapper professorMapper;
 
-	public String validateBeforeInsert(User user) throws Exception {
-		String s = user.getU_name();
+	public String validateBeforeInsert(Professor professor) throws Exception {
+
+		String s = professor.getP_name();
 		if (StringUtils.isBlank(s))
 			return "이름을 입력하세요.";
 
-		s = user.getU_email();
+		s = professor.getP_email();
 		if (StringUtils.isBlank(s))
 			return "이메일을 입력하세요.";
 
-		s = user.getU_tel();
+		s = professor.getP_tel();
 		if (StringUtils.isBlank(s))
 			return "전화번호를 입력하세요.";
-
-		//db에서는 s가 int형
-		//s = user.getU_id();
+		
+		// s가 int 타입.
+		//s = professor.getP_id();
 		//if (StringUtils.isBlank(s))
 		//	return "로그인ID를 입력하세요.";
 
-		s = user.getU_qpw();
+		s = professor.getP_qpw();
 		if (StringUtils.isBlank(s))
 			return "질문을 입력하세요.";
 
-		s = user.getU_apw();
+		s = professor.getP_aqw();
 		if (StringUtils.isBlank(s))
 			return "질문에 대한 답을 입력하세요.";
 
 
-		User user2=userMapper.selectByU_id(s);
-		if(user2!=null)
+		Professor professor2=professorMapper.selectByP_id(s);
+		if(professor2!=null)
 			return "로그인ID가 중복됩니다.";
 		return null;
 	}
 
-	public String validateBeforeUpdate(User user) throws Exception {
+	public String validateBeforeUpdate(Professor professor) throws Exception {
 
-
-		String s = user.getU_name();
+		
+		String s = professor.getP_name();
 		if (StringUtils.isBlank(s))
 			return "이름을 입력하세요.";
 
-		s = user.getU_email();
+		s = professor.getP_email();
 		if (StringUtils.isBlank(s))
 			return "이메일을 입력하세요.";
 
-		s = user.getU_tel();
+		s = professor.getP_tel();
 		if (StringUtils.isBlank(s))
 			return "전화번호를 입력하세요.";
 
-
-		s = user.getU_qpw();
+		s = professor.getP_qpw();
 		if (StringUtils.isBlank(s))
 			return "질문을 입력하세요.";
 
-		s = user.getU_apw();
+		s = professor.getP_aqw();
 		if (StringUtils.isBlank(s))
 			return "질문에 대한 답을 입력하세요.";
 
-
 		return null;
-
-
-	}
-
-	public String UpdatePw(User user) throws Exception {
-
-
-		String s = user.getU_email();
-		if (StringUtils.isBlank(s))
-			return "이메일을 입력하세요.";
-		//이메일이 틀릴때 
-
-		s = user.getU_pw();
-		if (StringUtils.isBlank(s))
-			return "변경할패스워드를 입력하세요.";
-		
-		// id = user.getId();
-		//User user2=userMapper.selectById(id);
-		//if(user2.getU_email().equals(user.getU_email()));
-		//	return "로그인ID가 중복됩니다.";
-
-		return null;
-
 	}
 
 
-
-	public static User getCurrentUser() { 
+	public static Professor getCurrentProfessor() { 
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication(); 
 		if (authentication instanceof MyAuthenticationProvider.MyAuthenticaion) 
-			return ((MyAuthenticationProvider.MyAuthenticaion) authentication).getUser(); 
+			return ((MyAuthenticationProvider2.MyAuthenticaion) authentication).getProfessor(); 
 		return null; 
 	} 
 
-	public static void setCurrentUser(User user) {
-		((MyAuthenticationProvider.MyAuthenticaion) 
-				SecurityContextHolder.getContext().getAuthentication()).setUser(user); 
+	public static void setCurrentProfessor(Professor professor) {
+		((MyAuthenticationProvider2.MyAuthenticaion) 
+				SecurityContextHolder.getContext().getAuthentication()).setProfessor(professor); 
 
 	}
 }

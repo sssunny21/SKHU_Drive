@@ -19,18 +19,13 @@
 		<li><a href="admin/edit.pd?id=1">edit.pd1</a></li>
 	</ul>
 	<ul>
-		<li>수정페이지</li>
-		<li><a href="home/myinfo.pd?id=1">edit.pd1</a></li>
-	</ul>
-
-	<ul>
 		<li>회원리스트</li>
-		<li><a href="admin/list.pd">list.pd</a></li>
+		<li><a href="admin/user_list.pd">user_list.pd</a></li>
+		<li>교수리스트</li>
+		<li><a href="admin/professor_list.pd">professor_list.pd</a></li>
 		<li>파일리스트</li>
-
-
 	</ul>
-	
+
 
 	<a href="http://localhost:8080/drive/">홈</a>
 </body>
