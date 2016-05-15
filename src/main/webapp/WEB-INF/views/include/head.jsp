@@ -20,6 +20,7 @@
 			$("#share_t").toggle();
 			$("#share_n").hide();
 		});
+		/**
 		$('#btn-upload').click(function(e){
 			e.preventDefault();
 			$("input:file").click();
@@ -32,11 +33,17 @@
 			}
 			$("input:file").val().toLowerCase();
 		});
+		**/
 	});
 </script>
 <script type="text/javascript">
 function createFdPopup(a){
 	var popUrl = "/drive/popup/createFolder.pd?dr_id="+a;
+	var popOption = "width=500, height=230";
+		window.open(popUrl,"new",popOption);
+}
+function createFilePopup(a){
+	var popUrl = "/drive/popup/createFile.pd?dr_id="+a;
 	var popOption = "width=500, height=230";
 		window.open(popUrl,"new",popOption);
 }

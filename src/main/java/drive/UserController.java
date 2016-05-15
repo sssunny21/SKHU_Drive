@@ -74,13 +74,11 @@ public class UserController {
 		String message = userService.UpdatePw(user);	
 		if (message == null) {
 			userMapper.updatePW(user);
-			UserService.setCurrentUser(user);
 			model.addAttribute("successMsg", "저장했습니다.");
 		} 
 		else{
 			model.addAttribute("errorMsg", message);
 		}
-		model.addAttribute("user", UserService.getCurrentUser());
 		return "user/myinfo_pw";
 
 	}

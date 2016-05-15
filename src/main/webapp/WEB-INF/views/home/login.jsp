@@ -19,6 +19,7 @@
     <button type="submit" class="btn btn-primary">
         <i class="icon-check icon-white"></i> 로그인
    </button>
+         <a href="sechPW.pd">비밀번호찾기</a>
 </form>
 
 <c:if test="${ param.error != null }">

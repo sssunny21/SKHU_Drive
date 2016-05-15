@@ -6,6 +6,7 @@
 	<definition name="commonLayout" template="/WEB-INF/views/template.jsp">
 		<put-attribute name="head" value="/WEB-INF/views/include/head.jsp" />
 		<put-attribute name="menu" value="/WEB-INF/views/include/menu.jsp" />
+		<put-attribute name="sidebar" value="/WEB-INF/views/include/sidebar.jsp" />
 		<put-attribute name="content" value="" />
 		<put-attribute name="footer" value="/WEB-INF/views/include/footer.jsp" />
 	</definition>

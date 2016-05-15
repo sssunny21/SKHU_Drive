@@ -8,9 +8,9 @@
 		SELECT
 		d.drive_name,p.p_name,d.drive_id
 		FROM [drive] d JOIN [professor] p ON
-		d.id2=p.id2 AND p.id2=#{id2}
+		d.id2=p.id2 AND p.d_id=#{d_id}
 	</select>
-
+	
 	<select id="selectFolderAll" resultType="drive.Folder">
 		SELECT * FROM [folder]
 	</select>
@@ -51,7 +51,12 @@
 		folder_id=#{folder_id}
 	</select>
 	
-	
+	<select id="selectByff_id" resultType="drive.Files">
+      SELECT *
+      FROM files
+      WHERE
+      files_id=#{files_id}
+   </select>
 	
 	<insert id="insert_folder" useGeneratedKeys="true" keyProperty="id">
 		INSERT
@@ -69,12 +74,11 @@
 
 	<insert id="insert_files" useGeneratedKeys="true" keyProperty="id">
 		INSERT
-		INTO [files] (files_name, files_size, files_date,folder_id,
-		files_body)
-		VALUES (#{files_name},#{files_size},
-		GETDATE(),#{folder_id}, #{data})
+		INTO [files] (files_name, files_size, files_date,folder_id,files_body)
+		VALUES (#{files_name},#{files_size},GETDATE(),#{folder_id}, #{files_body})
 	</insert>
-
+	
+	
 
 	<insert id="insert_favorites" useGeneratedKeys="true"
 		keyProperty="id">

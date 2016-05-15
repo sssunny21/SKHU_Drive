@@ -9,8 +9,6 @@ label {
 </style>
 <h1>관리자 학생 정보 수정</h1>
 <form:form method="post" modelAttribute="user">
-
-
 	<label>학번 </label>
 	<form:input path="u_id" />
 	<br>
