@@ -2,6 +2,8 @@ package drive;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 public interface DriveMapper {
 	List<Drive> selectDriveInfo(int id2);
 	List<Folder> selectFolderAll();
@@ -15,9 +17,7 @@ public interface DriveMapper {
 	void insert_sfolder(Folder folder);
 	void insert_files(Files files);
 	void delete(int f_id);
-	
-	
-	void insert_favorites(int id, int[] folder_id);
+	void insert_favorites(@Param("id") int id, @Param("folder_id") int folder_id);
 	
 	//파일
 	int selectCount();

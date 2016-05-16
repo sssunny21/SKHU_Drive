@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main"
@@ -66,7 +66,7 @@
 					</c:forEach>
 				</tbody>
 			</table>
-			<button class="btn" type="submit" name="cmd" values="saveFavorites">즐겨찾기</button>
+			<button class="btn" type="submit" name="cmd" value="saveFavorites">즐겨찾기</button>
 		</form:form>
 	</div>
 	<div class="table-responsive">

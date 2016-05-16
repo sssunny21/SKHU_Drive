@@ -45,7 +45,9 @@ public class DriveController {
 	@RequestMapping(value="/pdrive/folderList.pd",method = RequestMethod.POST,params="cmd=saveFavorites")
 	public String saveFavorites(@RequestParam("dr_id") int dr_id,@RequestParam("folder_id") int[] folder_id,Model model) {
 		User u = (User)userService.getCurrentUser();
-		driveMapper.insert_favorites(u.id,folder_id);
+		for(int i=0 ; i<folder_id.length; ++i){
+			driveMapper.insert_favorites(u.id,folder_id[i]);
+		}
 		System.out.println(folder_id);
 
 		List<Folder> dr1 = driveMapper.selectBydr_id1(dr_id);
@@ -74,12 +76,12 @@ public class DriveController {
 	}
 	
 	@RequestMapping(value="/pdrive/folderList2.pd" ,method = RequestMethod.POST)
-	public String folderlist2(Folder folder,HttpServletRequest request,@RequestParam("file") MultipartFile uploadedFile,Model model)throws IOException {
+	public String folderlist2(@RequestParam(value="fd_id",required=false) int fd_id,HttpServletRequest request,@RequestParam("file") MultipartFile uploadedFile,Model model)throws IOException {
 		Files files = new Files();
-		files.setFolder_id(2);
+		files.setFolder_id(fd_id);
 		files.setFiles_name(Paths.get(uploadedFile.getOriginalFilename()).getFileName().toString());
-		//files.setFiles_size((int)uploadedFile.getSize());
-		files.setFiles_size(folder.getFolder_id());
+		files.setFiles_size((int)uploadedFile.getSize());
+		//files.setFiles_size(folder.getFolder_id());
 		files.setData(uploadedFile.getBytes());
 		files.setFiles_body(uploadedFile.getBytes());
 		driveMapper.insert_files(files);
@@ -185,7 +187,7 @@ public class DriveController {
        response.setContentType("application/octet-stream"); 
        response.setHeader("Content-Disposition", "attachment;filename=" + fileName + ";"); 
        try (BufferedOutputStream output = new BufferedOutputStream(response.getOutputStream())) { 
-          output.write(files.getData()); 
+          output.write(files.getFiles_body()); 
        } 
     }
 
