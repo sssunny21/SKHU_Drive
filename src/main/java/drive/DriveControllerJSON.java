@@ -32,17 +32,17 @@ public class DriveControllerJSON {
 	}
 
 	@RequestMapping(value = "/pdrive/folderList2JSON.pd", method = RequestMethod.GET)
-	public @ResponseBody List<Drive> folderlist2(@RequestParam("parent_id") int parent_id) {
-		List<Drive> pr = driveMapper.selectBypr_id(parent_id);
-		List<Drive> all = driveMapper.selectFolderAll();
+	public @ResponseBody List<Folder> folderlist2(@RequestParam("parent_id") int parent_id) {
+		List<Folder> pr = driveMapper.selectBypr_id(parent_id);
+		List<Folder> all = driveMapper.selectFolderAll();
 		
 		//pr1 all가 어떻게 그려짐 ?
 		return pr;
 	}
 
 	@RequestMapping(value = "/pdrive/fileListJSON.pd", method = RequestMethod.GET)
-	public @ResponseBody List<Drive> filelist(@RequestParam("fd_id") int fd_id) {
-		List<Drive> fd = driveMapper.selectByf_id(fd_id);
+	public @ResponseBody List<Files> filelist(@RequestParam("fd_id") int fd_id) {
+		List<Files> fd = driveMapper.selectByf_id(fd_id);
 		return fd;
 	}
 

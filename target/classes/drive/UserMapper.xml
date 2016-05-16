@@ -18,6 +18,11 @@
 		SELECT * FROM [users]
 	</select>
 
+	<select id="checkQA" resultType="drive.User">
+		select * from [users]
+		WHERE u_id= #{u_id} AND u_qpw=#{u_qpw} AND u_apw=#{u_apw}
+	</select>
+
 	<select id="selectPage" resultType="drive.User">
         <![CDATA[
         SELECT * FROM 
@@ -55,9 +60,11 @@
 	<insert id="insert" useGeneratedKeys="true" keyProperty="id">
 		INSERT
 		[users]
-		(u_id,u_pw,u_name,u_tel,u_email,u_grade,u_qpw,u_apw,u_auth,d_id)
+		(u_id, u_pw, u_name, u_tel, u_email, u_grade, u_qpw, u_apw,
+		u_auth, d_id)
 		VALUES
-		(#{u_id},#{u_pw},#{u_name},#{u_tel},#{u_email},#{u_grade},#{u_qpw},#{u_apw},1,#{d_id})
+		(#{u_id}, #{u_pw}, #{u_name}, #{u_tel}, #{u_email},
+		#{u_grade}, #{u_qpw}, #{u_apw}, 1, #{d_id})
 	</insert>
 
 	<update id="update">
@@ -94,16 +101,23 @@
 	<update id="updatePW">
 		UPDATE [users] SET
 		u_pw = #{u_pw}
-		WHERE id=#{id} AND u_email=#{u_email}
+		WHERE id=#{id} AND
+		u_email=#{u_email}
+	</update>
+
+	<update id="changePW">
+		UPDATE [users] SET
+		u_pw = #{u_pw}
+		WHERE id = #{id}
 	</update>
 
 	<delete id="delete">
 		DELETE FROM [users] WHERE id = #{id}
 	</delete>
-	
-	 <select id="selectProfessor" resultType="drive.Drive">
-      SELECT * FROM [professor] WHERE d_id=#{d_id}
-   </select>
 
-	
+	<select id="selectProfessor" resultType="drive.Drive">
+		SELECT * FROM [professor] WHERE d_id=#{d_id}
+	</select>
+
+
 </mapper>

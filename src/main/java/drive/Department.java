@@ -3,6 +3,7 @@ package drive;
 class Department {
 	
     int d_id;
+    String d_name;
     public int getD_id() {
 		return d_id;
 	}
@@ -19,7 +20,7 @@ class Department {
 		this.d_name = d_name;
 	}
 
-	String d_name;
+	
 
     
 
