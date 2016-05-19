@@ -35,7 +35,7 @@
 	<h2 class="sub-header">세부사항</h2>
 	<div class="table-responsive">
 		<form:form method="post" id="formFavorites">
-			<table class="table table-striped" id="foldercheck">
+			<table class="table table-striped">
 				<thead>
 					<tr>
 						<th>
@@ -67,6 +67,7 @@
 				</tbody>
 			</table>
 			<button class="btn" type="submit" name="cmd" value="saveFavorites">즐겨찾기</button>
+			<button class="btn" type="submit" name="cmd" value="deleteFolder">삭제</button>
 		</form:form>
 	</div>
 	<div class="table-responsive">

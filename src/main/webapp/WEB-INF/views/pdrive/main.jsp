@@ -54,7 +54,7 @@
                      </div>
                   </td>
                   <td>${drive.drive_name}</td>
-                  <td>${drive.p_name}</td>
+                  <td>${drive.u_name}</td>
                </tr>
             </c:forEach>
          </tbody>

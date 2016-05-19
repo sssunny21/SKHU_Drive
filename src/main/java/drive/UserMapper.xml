@@ -19,8 +19,13 @@
 	</select>
 
 	<select id="checkQA" resultType="drive.User">
-		select * from [users]
+		SELECT * FROM [users]
 		WHERE u_id= #{u_id} AND u_qpw=#{u_qpw} AND u_apw=#{u_apw}
+	</select>
+	
+	<select id="selectMyFolder" resultType="drive.User">
+		SELECT f.folder_id,f.folder_name FROM my_join_folder m JOIN folder f 
+		ON m.folder_id=f.folder_id AND m.id=#{id}
 	</select>
 
 	<select id="selectPage" resultType="drive.User">
@@ -113,6 +118,10 @@
 
 	<delete id="delete">
 		DELETE FROM [users] WHERE id = #{id}
+	</delete>
+	
+	<delete id="deleteJoinFolder">
+		DELETE [my_join_folder] WHERE [folder_id] = #{folder_id}
 	</delete>
 
 	<select id="selectProfessor" resultType="drive.Drive">

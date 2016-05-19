@@ -1,6 +1,8 @@
 package drive;
 
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.util.SystemPropertyUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 
 @SuppressWarnings("unused")
@@ -16,11 +19,28 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 public class UserController {
 	@Autowired UserMapper userMapper;
+	@Autowired DriveMapper driveMapper;
 	@Autowired DepartmentMapper departmentMapper;
 	@Autowired UserService userService;
 
 	@RequestMapping("/user/mypage.pd")
 	public String mypage(Model model) {
+		if(UserService.getCurrentUser()!=null){
+  	      User u = (User)UserService.getCurrentUser();
+  	      List<Folder> myfolder = userMapper.selectMyFolder(u.getId()); 
+  	      model.addAttribute("myfolder",myfolder);
+  	      }
+		return "user/mypage";
+	}
+	
+	@RequestMapping(value="/user/mypage.pd",method = RequestMethod.POST,params="cmd=deleteFavorite")
+	public String deletefavorite(@RequestParam("folder_id") int[] folder_id,Model model){
+		User u = (User)userService.getCurrentUser();
+		for(int i=0 ; i<folder_id.length; ++i){
+			userMapper.deleteJoinFolder(folder_id[i]);
+		}
+		List<Folder> myfolder = userMapper.selectMyFolder(u.getId()); 
+		model.addAttribute("myfolder",myfolder);
 		return "user/mypage";
 	}
 

@@ -14,4 +14,7 @@
     $("[data-confirm]").click(function() {
         return confirm($(this).attr("data-confirm"));
     });
+    $('#myModal').on('shown.bs.modal', function () {
+    	  $('#myInput').focus()
+    	})
 });

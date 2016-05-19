@@ -15,9 +15,20 @@ public class User {
 	String u_apw;
 	int u_auth;
 	int d_id;
+	String u_email2; 
 	
-
+	int join_id;
+	int folder_id;
+	String folder_name;
     
+	public String getFolder_name() {
+		return folder_name;
+	}
+
+	public void setFolder_name(String folder_name) {
+		this.folder_name = folder_name;
+	}
+
 	public static String encryptPasswd(String u_pw) {
 		try {
 			MessageDigest md = MessageDigest.getInstance("SHA1");
@@ -111,14 +122,27 @@ public class User {
 		this.d_id = d_id;
 	}
 
-
-	String u_email2; 
-
     public String getU_email2() {
         return u_email2;
     }
     public void setU_email2(String u_email2) {
         this.u_email2 = u_email2;
     }
+    
+    public int getJoin_id() {
+		return join_id;
+	}
+
+	public void setJoin_id(int join_id) {
+		this.join_id = join_id;
+	}
+
+	public int getFolder_id() {
+		return folder_id;
+	}
+
+	public void setFolder_id(int folder_id) {
+		this.folder_id = folder_id;
+	}
     
 }

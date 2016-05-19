@@ -6,9 +6,9 @@
 
 	<select id="selectDriveInfo" resultType="drive.Drive">
 		SELECT
-		d.drive_name,p.p_name,d.drive_id
-		FROM [drive] d JOIN [professor] p ON
-		d.id2=p.id2 AND p.d_id=#{d_id}
+		d.drive_name,u.u_name,d.drive_id
+		FROM [drive] d JOIN [users] u ON
+		d.id=u.id AND u.d_id=#{d_id}
 	</select>
 	
 	<select id="selectFolderAll" resultType="drive.Folder">
@@ -63,6 +63,12 @@
 		INTO [folder] (folder_name, drive_id, parent_id)
 		VALUES
 		(#{folder_name},#{drive_id}, null)
+	</insert>
+	<insert id="insert_folder2" useGeneratedKeys="true" keyProperty="id">
+		INSERT
+		INTO [folder] (folder_name, drive_id, parent_id)
+		VALUES
+		(#{folder_name},#{drive_id}, #{folder_id})
 	</insert>
 
 	<insert id="insert_sfolder" useGeneratedKeys="true" keyProperty="id">
@@ -139,10 +145,12 @@
 		[folder]
 	</select>
 
-
-
-	<delete id="delete">
-		DELETE [files] WHERE [f_id] = #{f_id}
+	<delete id="deleteFolder">
+		DELETE [folder] WHERE [folder_id] = #{folder_id}
 	</delete>
+	<delete id="deleteFiles">
+		DELETE [files] WHERE [files_id] = #{files_id}
+	</delete>
+	
 
 </mapper>

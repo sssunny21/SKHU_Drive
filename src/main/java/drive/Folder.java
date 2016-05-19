@@ -14,6 +14,9 @@ public class Folder {
 	String sfolder_name;
 	String sfolder_pw;
 	
+	int id;
+	int join_id;
+	
 	public int getDrive_id() {
 		return drive_id;
 	}
@@ -73,6 +76,19 @@ public class Folder {
 	}
 	public void setSfolder_pw(String sfolder_pw) {
 		this.sfolder_pw = sfolder_pw;
+	}
+	
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+	public int getJoin_id() {
+		return join_id;
+	}
+	public void setJoin_id(int join_id) {
+		this.join_id = join_id;
 	}
 	
 }

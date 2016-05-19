@@ -23,6 +23,13 @@
 		<put-attribute name="head" value="/WEB-INF/views/include/head.jsp" />
 		<put-attribute name="content3" value="" />
 	</definition>
+	
+	<definition name="userLayout" template="/WEB-INF/views/template4.jsp">
+		<put-attribute name="head" value="/WEB-INF/views/include/head.jsp" />
+		<put-attribute name="menu" value="/WEB-INF/views/include/menu.jsp" />
+		<put-attribute name="content4" value="" />
+		<put-attribute name="footer" value="/WEB-INF/views/include/footer.jsp" />
+	</definition>
 
 	<definition name="pdrive/*" extends="driveLayout">
 		<put-attribute name="content2" value="/WEB-INF/views/pdrive/{1}.jsp" />
@@ -32,10 +39,12 @@
 		<put-attribute name="content3" value="/WEB-INF/views/popup/{1}.jsp" />
 	</definition>
 	
+	<definition name="user/*" extends="userLayout">
+		<put-attribute name="content4" value="/WEB-INF/views/user/{1}.jsp" />
+	</definition>
+	
 	<definition name="*/*" extends="commonLayout">
 		<put-attribute name="content" value="/WEB-INF/views/{1}/{2}.jsp" />
 	</definition>
-
-
 
 </tiles-definitions>

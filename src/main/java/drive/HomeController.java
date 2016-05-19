@@ -23,6 +23,8 @@ public class HomeController {
       User u = (User)UserService.getCurrentUser();
       List<Drive> professor = userMapper.selectProfessor(u.getD_id());
       model.addAttribute("professor",professor);
+      List<Folder> myfolder = userMapper.selectMyFolder(u.getId()); 
+      model.addAttribute("myfolder",myfolder);
       }
         return "home/index";
     }
@@ -34,6 +36,11 @@ public class HomeController {
     
     @RequestMapping("/include/sidebar.pd") 
     public String sidebar(Model model) throws Exception{
+    	if(UserService.getCurrentUser()!=null){
+    	      User u = (User)UserService.getCurrentUser();
+    	      List<Folder> myfolder = userMapper.selectMyFolder(u.getId()); 
+    	      model.addAttribute("myfolder",myfolder);
+    	      }
     	return "include/sidebar";
     }
     

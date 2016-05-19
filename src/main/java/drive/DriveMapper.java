@@ -14,9 +14,11 @@ public interface DriveMapper {
 	List<Files> selectByf_id(int folder_id);
 	Files selectByff_id(int files_id);
 	void insert_folder(Folder folder);
+	void insert_folder2(Folder folder);
 	void insert_sfolder(Folder folder);
 	void insert_files(Files files);
-	void delete(int f_id);
+	void deleteFolder(int folder_id);
+	void deleteFiles(int files_id);
 	void insert_favorites(@Param("id") int id, @Param("folder_id") int folder_id);
 	
 	//파일

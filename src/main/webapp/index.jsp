@@ -24,6 +24,8 @@
 		<li>교수리스트</li>
 		<li><a href="admin/professor_list.pd">professor_list.pd</a></li>
 		<li>파일리스트</li>
+		<li>ddMM</li>
+		<li><a href="C:\Program Files (x86)\Kakao\KakaoTalk\KakaoTalk.exe">sdsds</a></li>
 	</ul>
 
 	<a href="http://localhost:8080/drive/">홈</a>

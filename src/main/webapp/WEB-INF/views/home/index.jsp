@@ -8,15 +8,7 @@
 <h3>현재 사용자</h3>
 
 <sec:authorize access="authenticated">
-<!--
-   <p>로그인했슴다</p>
-   <ul>
-   <c:forEach var="professor" items="${professor}">
-      <a href="/drive/pdrive/main.pd?d_id=${professor.d_id }" class="btn btn-primary" role="button">
-      ${professor.p_name }</a>
-   </c:forEach>
-   </ul>
--->
+dd
 </sec:authorize>
 
 <sec:authorize access="not authenticated">
