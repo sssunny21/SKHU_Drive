@@ -4,8 +4,6 @@ public class Folder {
 	int drive_id;
 	String drive_name;
 	int d_id;
-	int id2;
-
 	int folder_id;
 	String folder_name;
 	int parent_id;
@@ -35,12 +33,7 @@ public class Folder {
 	public void setD_id(int d_id) {
 		this.d_id = d_id;
 	}
-	public int getId2() {
-		return id2;
-	}
-	public void setId2(int id2) {
-		this.id2 = id2;
-	}
+	
 	public int getFolder_id() {
 		return folder_id;
 	}

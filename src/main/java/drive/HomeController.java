@@ -25,6 +25,8 @@ public class HomeController {
       model.addAttribute("professor",professor);
       List<Folder> myfolder = userMapper.selectMyFolder(u.getId()); 
       model.addAttribute("myfolder",myfolder);
+      List<Drive> mydrive = userMapper.selectMyDrive(u.getId());
+      model.addAttribute("mydrive",mydrive);
       }
         return "home/index";
     }

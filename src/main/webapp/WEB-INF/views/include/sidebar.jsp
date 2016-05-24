@@ -22,11 +22,17 @@
 			</div>
 		</ul>
 		<ul class="nav nav-sidebar">
+			<li>나의 드라이브</li>
+			<c:forEach var="mydrive" items="${mydrive}">
+				<a href="/drive/pdrive/folderList.pd?dr_id=${mydrive.drive_id }">
+					${mydrive.drive_name }</a>
+				<hr />
+			</c:forEach>
 			<li>나의 폴더</li>
 			<c:forEach var="myfolder" items="${myfolder}">
 				<a href="/drive/pdrive/folderList2.pd?fd_id=${myfolder.folder_id }">
 					${myfolder.folder_name }</a>
-					<hr/>
+				<hr />
 			</c:forEach>
 		</ul>
 	</div>

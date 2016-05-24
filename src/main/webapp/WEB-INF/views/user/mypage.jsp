@@ -49,6 +49,32 @@
 							<label></label>
 						</div>
 					</th>
+					<th>즐겨찾는 드라이브</th>
+				</tr>
+			</thead>
+			<tbody>
+				<c:forEach var="mydrive" items="${mydrive}">
+					<tr
+						data-url="/drive/pdrive/folderList.pd?dr_id=${mydrive.drive_id }"
+						data-id="${mydrive.drive_id}">
+						<td>
+							<div class="checkbox"
+								style="margin-top: 0px; margin-bottom: 0px;">
+								<label><input type="checkbox" name="drive_id"
+									value="${mydrive.drive_id}"></label>
+							</div>
+						</td>
+						<td>${mydrive.drive_name }</td>
+					</tr>
+				</c:forEach>
+			</tbody>
+			<thead>
+				<tr>
+					<th>
+						<div class="checkbox" style="margin-top: 0px; margin-bottom: 0px;">
+							<label></label>
+						</div>
+					</th>
 					<th>즐겨찾는 폴더</th>
 				</tr>
 			</thead>
@@ -69,7 +95,8 @@
 				</c:forEach>
 			</tbody>
 		</table>
-		<button class="btn" type="submit" name="cmd" value="deleteFavorite">삭제</button>
+		<button class="btn" type="submit" name="cmd" value="deleteFavorite">폴더 삭제</button>
+		<button class="btn" type="submit" name="cmd" value="deleteFavorite2">드라이브 삭제</button>
 	</form:form>
 	</div>
 </sec:authorize>

@@ -8,6 +8,7 @@ public interface DriveMapper {
 	List<Drive> selectDriveInfo(int id2);
 	List<Folder> selectFolderAll();
 	Folder selectBydr_id(int dr_id);
+	Drive selectDrive(int drive_id);
 	List<Folder> selectBydr_id1(int drive_id);
 	List<Folder> selectBydr_id2(int drive_id);
 	List<Folder> selectBypr_id (int parent_id);
@@ -19,7 +20,8 @@ public interface DriveMapper {
 	void insert_files(Files files);
 	void deleteFolder(int folder_id);
 	void deleteFiles(int files_id);
-	void insert_favorites(@Param("id") int id, @Param("folder_id") int folder_id);
+	void insert_favorites(@Param("id") int id, @Param("folder_id") int folder_id);//폴더 즐겨찾기
+	void insert_favorites_drive(@Param("id") int id, @Param("drive_id") int drive_id);//드라이브 즐겨찾기
 	
 	//파일
 	int selectCount();

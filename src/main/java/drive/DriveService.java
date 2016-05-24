@@ -18,5 +18,28 @@ public class DriveService {
 
         return null;
     }
+	
+	public boolean isAuthor(Drive drive){
+		return(UserService.getCurrentUser()!=null)&&
+				(drive.getId()==UserService.getCurrentUser().getId());
+	}
+	
+	public boolean canCreate(int sfolder_id){
+		User user = UserService.getCurrentUser();
+		if(user == null) return false;
+		if("2".equals(user.getU_auth()))return true;
+		return false;
+	}
+	public boolean canEdit(Drive drive) {
+        return isAuthor(drive);
+    }
+
+    public boolean canDelete(Drive drive) {
+        User user = UserService.getCurrentUser();
+        if (user == null) return false;
+        if ("2".equals(user.getU_auth())) return true;
+        return isAuthor(drive);
+    }
+
 
 }

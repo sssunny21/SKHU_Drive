@@ -15,8 +15,7 @@
         http://www.springframework.org/schema/security/spring-security.xsd">
 
 	<context:component-scan base-package="drive" />
-	<sec:global-method-security
-		secured-annotations="enabled" />
+	<sec:global-method-security secured-annotations="enabled" />
 
 	<bean id="viewResolver"
 		class="org.springframework.web.servlet.view.UrlBasedViewResolver">

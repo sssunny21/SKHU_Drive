@@ -17,9 +17,15 @@ public class User {
 	int d_id;
 	String u_email2; 
 	
+	//사용자가 즐겨찾는 폴더
 	int join_id;
 	int folder_id;
 	String folder_name;
+	
+	//사용자가 즐겨찾는 드라이브
+	int join_id2;
+	int drive_id;
+	String drive_name;
     
 	public String getFolder_name() {
 		return folder_name;
@@ -143,6 +149,30 @@ public class User {
 
 	public void setFolder_id(int folder_id) {
 		this.folder_id = folder_id;
+	}
+	
+	public int getJoin_id2() {
+		return join_id2;
+	}
+
+	public void setJoin_id2(int join_id2) {
+		this.join_id2 = join_id2;
+	}
+
+	public int getDrive_id() {
+		return drive_id;
+	}
+
+	public void setDrive_id(int drive_id) {
+		this.drive_id = drive_id;
+	}
+
+	public String getDrive_name() {
+		return drive_name;
+	}
+
+	public void setDrive_name(String drive_name) {
+		this.drive_name = drive_name;
 	}
     
 }

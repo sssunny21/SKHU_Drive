@@ -99,5 +99,4 @@
 			</tbody>
 		</table>
 	</div>
-	<input type="file" id="file">
 </div>

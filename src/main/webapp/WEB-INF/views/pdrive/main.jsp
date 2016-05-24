@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
-
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main"
@@ -32,6 +32,7 @@
    <h2 class="sub-header">세부사항</h2>
 
    <div class="table-responsive">
+   	<form:form method="post" id="formDrive">
       <table class="table table-striped">
          <thead>
             <tr>
@@ -50,7 +51,7 @@
                   <td>
                      <div class="checkbox"
                         style="margin-top: 0px; margin-bottom: 0px;">
-                        <label><input type="checkbox"></label>
+                        <label><input type="checkbox" name="drive_id" value="${drive.drive_id}"></label>
                      </div>
                   </td>
                   <td>${drive.drive_name}</td>
@@ -59,6 +60,8 @@
             </c:forEach>
          </tbody>
       </table>
+      <button class="btn" type="submit" name="cmd" value="saveFavorites">즐겨찾기</button>
+      </form:form>
    </div>
 </div>
 <div id="popupCreate" style="display: none;"></div>

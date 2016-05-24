@@ -31,11 +31,31 @@ public class DriveController {
 	public String main(@RequestParam("d_id") int d_id,Model model) {
 		List<Drive> drive = driveMapper.selectDriveInfo(d_id);
 		model.addAttribute("main", drive);
+		
 		if(UserService.getCurrentUser()!=null){
 			User u = (User)UserService.getCurrentUser();
 			List<Folder> myfolder = userMapper.selectMyFolder(u.getId()); 
 			model.addAttribute("myfolder",myfolder);
+			List<Drive> mydrive = userMapper.selectMyDrive(u.getId());
+			model.addAttribute("mydrive",mydrive);
 		}
+	
+		return "pdrive/main";
+	}
+	
+	@RequestMapping(value="/pdrive/main.pd",method = RequestMethod.POST,params="cmd=saveFavorites")
+	public String saveFavorites3(@RequestParam("d_id") int d_id,@RequestParam("drive_id") int[] drive_id,Model model) {
+		User u = (User)userService.getCurrentUser();
+		for(int i=0 ; i<drive_id.length; ++i){
+			driveMapper.insert_favorites_drive(u.id,drive_id[i]);
+		}
+		List<Drive> drive = driveMapper.selectDriveInfo(d_id);
+		model.addAttribute("main", drive);
+		List<Drive> mydrive = userMapper.selectMyDrive(u.getId());
+		model.addAttribute("mydrive",mydrive);
+		List<Folder> myfolder = userMapper.selectMyFolder(u.getId()); 
+		model.addAttribute("myfolder",myfolder);
+		
 		return "pdrive/main";
 	}
 
@@ -49,6 +69,8 @@ public class DriveController {
 			User u = (User)UserService.getCurrentUser();
 			List<Folder> myfolder = userMapper.selectMyFolder(u.getId()); 
 			model.addAttribute("myfolder",myfolder);
+			List<Drive> mydrive = userMapper.selectMyDrive(u.getId());
+			model.addAttribute("mydrive",mydrive);
 		}
 		return "pdrive/folderList";
 	}
@@ -59,7 +81,7 @@ public class DriveController {
 		for(int i=0 ; i<folder_id.length; ++i){
 			driveMapper.insert_favorites(u.id,folder_id[i]);
 		}
-		
+
 		List<Folder> dr1 = driveMapper.selectBydr_id1(dr_id);
 		List<Folder> dr2 = driveMapper.selectBydr_id2(dr_id);
 		model.addAttribute("dr1", dr1);
@@ -68,13 +90,20 @@ public class DriveController {
 		model.addAttribute("myfolder",myfolder);
 		return "pdrive/folderList";
 	}
-	
+
 	@RequestMapping(value="/pdrive/folderList.pd",method = RequestMethod.POST,params="cmd=deleteFolder")
 	public String deletefolder(@RequestParam("dr_id") int dr_id,@RequestParam("folder_id") int[] folder_id,Model model){
-		User u = (User)userService.getCurrentUser();
-		for(int i=0 ; i<folder_id.length; ++i){
-			driveMapper.deleteFolder(folder_id[i]);
+		Drive drive = new Drive();
+		drive = driveMapper.selectDrive(dr_id);
+		System.out.println("여기는오니");
+		if (!driveService.isAuthor(drive)){
+			System.out.println("권한검사");
+			for(int i=0 ; i<folder_id.length; ++i){
+				driveMapper.deleteFolder(folder_id[i]);
+			}
 		}
+		System.out.println("끝났니?");
+		User u = (User)userService.getCurrentUser();
 		List<Folder> dr1 = driveMapper.selectBydr_id1(dr_id);
 		List<Folder> dr2 = driveMapper.selectBydr_id2(dr_id);
 		model.addAttribute("dr1", dr1);
@@ -83,7 +112,7 @@ public class DriveController {
 		model.addAttribute("myfolder",myfolder);
 		return "pdrive/folderList";
 	}
-	
+
 	@RequestMapping(value="/pdrive/folderList2.pd",method = RequestMethod.POST,params="cmd=saveFavorites")
 	public String saveFavorites2(@RequestParam("fd_id") int fd_id,@RequestParam("folder_id") int[] folder_id,Model model) {
 		List<Folder> pr = driveMapper.selectBypr_id(fd_id);
@@ -104,6 +133,7 @@ public class DriveController {
 			}
 			List<Folder> myfolder = userMapper.selectMyFolder(u.getId()); 
 			model.addAttribute("myfolder",myfolder);
+			
 		}
 		return "pdrive/folderList2";
 	}
@@ -118,7 +148,7 @@ public class DriveController {
 		model.addAttribute("myfolder",myfolder);
 		return "pdrive/folderList2";
 	}
-	
+
 
 	@RequestMapping(value="/pdrive/folderList2.pd" ,method = RequestMethod.GET)
 	public String folderlist2(@RequestParam("fd_id") int fd_id,Model model) {
@@ -138,10 +168,12 @@ public class DriveController {
 			User u = (User)UserService.getCurrentUser();
 			List<Folder> myfolder = userMapper.selectMyFolder(u.getId()); 
 			model.addAttribute("myfolder",myfolder);
+			List<Drive> mydrive = userMapper.selectMyDrive(u.getId());
+			model.addAttribute("mydrive",mydrive);
 		}
 		return "pdrive/folderList2";
 	}//서브 폴더 리스트를 보여주는 액션메소드
-	
+
 	@RequestMapping(value="/pdrive/folderList2.pd" ,method = RequestMethod.POST,params="cmd=createfolder2")
 	public String createfolder2(@RequestParam("fd_id") int fd_id,Folder folder,Model model) throws Exception {
 		String message = driveService.validatepw(folder);
@@ -152,7 +184,7 @@ public class DriveController {
 		}
 		return "redirect:/pdrive/folderList2.pd?fd_id="+fd_id;
 	}
-	
+
 	@RequestMapping(value="/pdrive/folderList2.pd" ,method = RequestMethod.POST)
 	public String folderlist2(@RequestParam("fd_id") int fd_id,HttpServletRequest request,@RequestParam("file") MultipartFile uploadedFile,Model model)throws IOException {
 		Files files = new Files();
@@ -171,7 +203,7 @@ public class DriveController {
 		for(int i=0 ; i<files_id.length; ++i){
 			driveMapper.deleteFiles(files_id[i]);
 		}
-		
+
 		List<Folder> myfolder = userMapper.selectMyFolder(u.getId()); 
 		model.addAttribute("myfolder",myfolder);
 		return "redirect:/pdrive/folderList2.pd?fd_id="+fd_id;
@@ -202,7 +234,7 @@ public class DriveController {
 		model.addAttribute("folder", driveMapper.selectBydr_id1(dr_id));
 		return "popup/createFile";
 	}
-	
+
 	@RequestMapping(value="/popup/createFile.pd",method = RequestMethod.POST)
 	public String createFile(Folder folder,@RequestParam("file") MultipartFile uploadedFile,Model model)throws Exception{
 		Files files = new Files();
@@ -214,7 +246,7 @@ public class DriveController {
 		driveMapper.insert_files(files);
 		return "redirect:/pdrive/folderList2.pd?fd_id="+;
 	}
-	**/
+	 **/
 
 	@RequestMapping("/pdrive/download.pd")
 	public void download(@RequestParam("id") int id, HttpServletResponse response) throws IOException { 

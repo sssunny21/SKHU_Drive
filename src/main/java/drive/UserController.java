@@ -26,13 +26,15 @@ public class UserController {
 	@RequestMapping("/user/mypage.pd")
 	public String mypage(Model model) {
 		if(UserService.getCurrentUser()!=null){
-  	      User u = (User)UserService.getCurrentUser();
-  	      List<Folder> myfolder = userMapper.selectMyFolder(u.getId()); 
-  	      model.addAttribute("myfolder",myfolder);
-  	      }
+			User u = (User)UserService.getCurrentUser();
+			List<Folder> myfolder = userMapper.selectMyFolder(u.getId()); 
+			model.addAttribute("myfolder",myfolder);
+			List<Drive> mydrive = userMapper.selectMyDrive(u.getId());
+			model.addAttribute("mydrive",mydrive);
+		}
 		return "user/mypage";
 	}
-	
+
 	@RequestMapping(value="/user/mypage.pd",method = RequestMethod.POST,params="cmd=deleteFavorite")
 	public String deletefavorite(@RequestParam("folder_id") int[] folder_id,Model model){
 		User u = (User)userService.getCurrentUser();
@@ -41,9 +43,23 @@ public class UserController {
 		}
 		List<Folder> myfolder = userMapper.selectMyFolder(u.getId()); 
 		model.addAttribute("myfolder",myfolder);
+		List<Drive> mydrive = userMapper.selectMyDrive(u.getId());
+		model.addAttribute("mydrive",mydrive);
 		return "user/mypage";
 	}
-
+	@RequestMapping(value="/user/mypage.pd",method = RequestMethod.POST,params="cmd=deleteFavorite2")
+	public String deletefavoritedrive(@RequestParam("drive_id") int[] drive_id,Model model){
+		User u = (User)userService.getCurrentUser();
+		for(int i=0 ; i<drive_id.length; ++i){
+			userMapper.deleteJoinDrive(drive_id[i]);
+		}
+		List<Folder> myfolder = userMapper.selectMyFolder(u.getId()); 
+		model.addAttribute("myfolder",myfolder);
+		List<Drive> mydrive = userMapper.selectMyDrive(u.getId());
+		model.addAttribute("mydrive",mydrive);
+		return "user/mypage";
+	}
+	
 
 	@RequestMapping(value="/home/join.pd")
 	public String join(User user, Model model) throws Exception{

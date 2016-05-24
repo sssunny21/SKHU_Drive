@@ -14,12 +14,18 @@
 	<select id="selectFolderAll" resultType="drive.Folder">
 		SELECT * FROM [folder]
 	</select>
+	
 	<select id="selectBydr_id" resultType="drive.Folder">
 		SELECT *
 		FROM drive
 		WHERE
 		drive_id=#{dr_id}
 	</select>
+	
+	<select id="selectDrive" resultType="drive.Drive">
+		SELECT * FROM [drive] where drive_id=#{drive_id}
+	</select>
+	
 	<select id="selectBydr_id1" resultType="drive.Folder">
 		SELECT
 		folder_id,folder_name,drive_id,parent_id
@@ -92,6 +98,14 @@
 		INTO [my_join_folder] (id, folder_id)
 		VALUES
 		(#{id},#{folder_id})
+	</insert>
+	
+	<insert id="insert_favorites_drive" useGeneratedKeys="true"
+		keyProperty="id">
+		INSERT
+		INTO [my_join_drive] (id, drive_id)
+		VALUES
+		(#{id},#{drive_id})
 	</insert>
 
 

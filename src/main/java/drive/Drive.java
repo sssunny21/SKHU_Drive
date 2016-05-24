@@ -4,7 +4,8 @@ public class Drive {
 	int drive_id;
 	String drive_name;
 	int d_id;
-	int id2;
+	int id;
+	
 	int p_id;
 	String u_name;
 	
@@ -39,11 +40,11 @@ public class Drive {
 	public void setD_id(int d_id) {
 		this.d_id = d_id;
 	}
-	public int getId2() {
-		return id2;
+	public int getId() {
+		return id;
 	}
-	public void setId2(int id2) {
-		this.id2 = id2;
+	public void setId(int id) {
+		this.id = id;
 	}
 	
 }

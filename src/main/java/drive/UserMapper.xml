@@ -27,6 +27,11 @@
 		SELECT f.folder_id,f.folder_name FROM my_join_folder m JOIN folder f 
 		ON m.folder_id=f.folder_id AND m.id=#{id}
 	</select>
+	
+	<select id="selectMyDrive" resultType="drive.User">
+		SELECT d.drive_id,d.drive_name FROM my_join_drive m JOIN drive d
+		ON m.drive_id=d.drive_id AND m.id=#{id}
+	</select>
 
 	<select id="selectPage" resultType="drive.User">
         <![CDATA[
@@ -122,6 +127,9 @@
 	
 	<delete id="deleteJoinFolder">
 		DELETE [my_join_folder] WHERE [folder_id] = #{folder_id}
+	</delete>
+	<delete id="deleteJoinDrive">
+		DELETE [my_join_drive] WHERE [drive_id] = #{drive_id}
 	</delete>
 
 	<select id="selectProfessor" resultType="drive.Drive">
