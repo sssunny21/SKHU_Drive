@@ -18,7 +18,7 @@ public class HomeController {
    @Autowired DepartmentMapper departmentMapper;
 
    @RequestMapping("/home/index.pd")
-    public String index(Model model) {
+    public String index(Model model) throws Exception {
       if(UserService.getCurrentUser()!=null){
       User u = (User)UserService.getCurrentUser();
       List<Drive> professor = userMapper.selectProfessor(u.getD_id());
@@ -27,6 +27,8 @@ public class HomeController {
       model.addAttribute("myfolder",myfolder);
       List<Drive> mydrive = userMapper.selectMyDrive(u.getId());
       model.addAttribute("mydrive",mydrive);
+      String auth = userService.printAuth(u);
+      model.addAttribute("auth",auth);
       }
         return "home/index";
     }
@@ -44,6 +46,16 @@ public class HomeController {
     	      model.addAttribute("myfolder",myfolder);
     	      }
     	return "include/sidebar";
+    }
+    
+    @RequestMapping("/include/menu.pd") 
+    public String menu(Model model) throws Exception{
+    	if(UserService.getCurrentUser()!=null){
+    	      User u = (User)UserService.getCurrentUser();
+    	      String auth = userService.printAuth(u);
+    	      model.addAttribute("auth",auth);
+    	      }
+    	return "include/menu";
     }
     
 

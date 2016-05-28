@@ -6,7 +6,7 @@
 
 	<select id="selectDriveInfo" resultType="drive.Drive">
 		SELECT
-		d.drive_name,u.u_name,d.drive_id
+		d.drive_name,u.u_name,d.drive_id,d.d_id
 		FROM [drive] d JOIN [users] u ON
 		d.id=u.id AND u.d_id=#{d_id}
 	</select>

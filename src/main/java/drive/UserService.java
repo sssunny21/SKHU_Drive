@@ -123,6 +123,16 @@ public class UserService {
 	      return null;
 
 	   }
+	   
+	   public String printAuth(User user) throws Exception {
+		   String name = user.getU_name();
+		   int auth = user.getU_auth();
+		   String print=null;
+		   if(auth == 1){print="학생 "+name;}
+		   else if(auth == 2){print=name+" 교수님";}
+		   
+		   return print;
+	   }
 
 
 	public static User getCurrentUser() { 

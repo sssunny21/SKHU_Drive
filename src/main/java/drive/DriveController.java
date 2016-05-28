@@ -28,7 +28,7 @@ public class DriveController {
 	@Autowired UserMapper userMapper;
 
 	@RequestMapping(value="/pdrive/main.pd" ,method = RequestMethod.GET)
-	public String main(@RequestParam("d_id") int d_id,Model model) {
+	public String main(@RequestParam("d_id") int d_id,Model model){
 		List<Drive> drive = driveMapper.selectDriveInfo(d_id);
 		model.addAttribute("main", drive);
 		
