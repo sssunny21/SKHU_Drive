@@ -62,7 +62,14 @@
       FROM files
       WHERE
       files_id=#{files_id}
-   </select>
+   	</select>
+   	
+   	<select id="selectByfd_id" resultType="drive.Folder">
+      SELECT *
+      FROM [folder]
+      WHERE
+      folder_id=#{fd_id}
+   	</select>
 	
 	<insert id="insert_folder" useGeneratedKeys="true" keyProperty="id">
 		INSERT

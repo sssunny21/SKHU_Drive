@@ -30,7 +30,7 @@
 			</c:forEach>
 			<li>나의 폴더</li>
 			<c:forEach var="myfolder" items="${myfolder}">
-				<a href="/drive/pdrive/folderList2.pd?fd_id=${myfolder.folder_id }">
+				<a href="/drive/pdrive/folderList2.pd?fd_id=${myfolder.folder_id }&dr_id=${myfolder.drive_id }">
 					${myfolder.folder_name }</a>
 				<hr />
 			</c:forEach>

@@ -36,7 +36,6 @@ input[type=file] {
 		</nav>
 		<h5 class="text-muted">홈 > 폴더이름</h5>
 	</div>
-
 	<h2 class="sub-header">세부사항</h2>
 	<div class="table-responsive">
 		<form:form method="post" id="formFavorites">
@@ -57,7 +56,7 @@ input[type=file] {
 					<c:forEach var="pr" items="${pr}">
 						<c:choose>
 							<c:when test="${pr.folder_id!=pr.parent_id}">
-								<tr data-url="folderList2.pd?fd_id=${pr.folder_id}">
+								<tr data-url="folderList2.pd?fd_id=${pr.folder_id}&dr_id=${pr.drive_id}">
 									<td>
 										<div class="checkbox"
 											style="margin-top: 0px; margin-bottom: 0px;">
@@ -92,7 +91,6 @@ input[type=file] {
 					<h4 class="modal-title">폴더 생성</h4>
 				</div>
 				<div class="modal-body">
-				<c:forEach var="pr" items="${pr}" begin="1" end="1">
 					<label>공유 여부 </label>
 					<div class="checkbox">
 						<input type="checkbox" id="share_tn">공유폴더
@@ -101,10 +99,9 @@ input[type=file] {
 						<label>폴더 이름 </label>
 						<form:input path="folder_name"/>
 						<br>
-						<input id="drive_id" name="drive_id" type="hidden" value="${pr.drive_id }"/>
+						<form:hidden path="drive_id" id="dr_id" name="dr_id"/>
 						<form:hidden path="folder_id" id="parent_id" name="parent_id"/>
 					</div>
-				</c:forEach>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>

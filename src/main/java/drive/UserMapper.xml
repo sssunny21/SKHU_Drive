@@ -24,7 +24,7 @@
 	</select>
 	
 	<select id="selectMyFolder" resultType="drive.User">
-		SELECT f.folder_id,f.folder_name FROM my_join_folder m JOIN folder f 
+		SELECT f.drive_id,f.folder_id,f.folder_name FROM my_join_folder m JOIN folder f 
 		ON m.folder_id=f.folder_id AND m.id=#{id}
 	</select>
 	

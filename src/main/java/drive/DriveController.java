@@ -95,14 +95,15 @@ public class DriveController {
 	public String deletefolder(@RequestParam("dr_id") int dr_id,@RequestParam("folder_id") int[] folder_id,Model model){
 		Drive drive = new Drive();
 		drive = driveMapper.selectDrive(dr_id);
-		System.out.println("여기는오니");
-		if (!driveService.isAuthor(drive)){
-			System.out.println("권한검사");
+		System.out.println("사용자id"+drive.getId());
+		System.out.println("드라이브아이디"+drive.getDrive_id());
+		if (driveService.isAuthor(drive)==true){
 			for(int i=0 ; i<folder_id.length; ++i){
 				driveMapper.deleteFolder(folder_id[i]);
 			}
+		}else{
+			model.addAttribute("errorMsg", "폴더 삭제 권한이 없습니다.");
 		}
-		System.out.println("끝났니?");
 		User u = (User)userService.getCurrentUser();
 		List<Folder> dr1 = driveMapper.selectBydr_id1(dr_id);
 		List<Folder> dr2 = driveMapper.selectBydr_id2(dr_id);
@@ -138,12 +139,13 @@ public class DriveController {
 		return "pdrive/folderList2";
 	}
 	@RequestMapping(value="/pdrive/folderList2.pd",method = RequestMethod.POST,params="cmd=deleteFolder")
-	public String deletefolder2(@RequestParam("folder_id") int[] folder_id,Model model){
+	public String deletefolder2(@RequestParam("folder_id") int[] folder_id,@RequestParam("dr_id") int dr_id,Model model){
 		User u = (User)userService.getCurrentUser();
 		for(int i=0 ; i<folder_id.length; ++i){
 			driveMapper.deleteFolder(folder_id[i]);
-			folderlist2(folder_id[i],model);
+			folderlist2(folder_id[i],dr_id,model);
 		}
+		
 		List<Folder> myfolder = userMapper.selectMyFolder(u.getId()); 
 		model.addAttribute("myfolder",myfolder);
 		return "pdrive/folderList2";
@@ -151,16 +153,16 @@ public class DriveController {
 
 
 	@RequestMapping(value="/pdrive/folderList2.pd" ,method = RequestMethod.GET)
-	public String folderlist2(@RequestParam("fd_id") int fd_id,Model model) {
+	public String folderlist2(@RequestParam("fd_id") int fd_id,@RequestParam("dr_id") int dr_id,Model model){
 		List<Folder> pr = driveMapper.selectBypr_id(fd_id);
 		List<Folder> all = driveMapper.selectFolderAll();
 		model.addAttribute("pr", pr);
 		model.addAttribute("all",all);
 
 		Folder folder = new Folder();
+		folder.setDrive_id(dr_id);
 		folder.setFolder_id(fd_id);
-		model.addAttribute("folder",folder);
-		System.out.println(folder.getFolder_id());
+		model.addAttribute("folder", folder);
 
 		List<Files> fd = driveMapper.selectByf_id(fd_id);
 		model.addAttribute("fd", fd);
@@ -175,16 +177,12 @@ public class DriveController {
 	}//서브 폴더 리스트를 보여주는 액션메소드
 
 	@RequestMapping(value="/pdrive/folderList2.pd" ,method = RequestMethod.POST,params="cmd=createfolder2")
-	public String createfolder2(@RequestParam("fd_id") int fd_id,Folder folder,Model model) throws Exception {
+	public String createfolder2(@RequestParam("fd_id") int fd_id,@RequestParam("dr_id") int dr_id,Folder folder,Model model) throws Exception {
 		String message = driveService.validatepw(folder);
-		if (message == null){
-			driveMapper.insert_sfolder(folder);
-		}else{
-			driveMapper.insert_folder2(folder);
-		}
-		return "redirect:/pdrive/folderList2.pd?fd_id="+fd_id;
-	}
-
+		driveMapper.insert_folder2(folder);
+		return "redirect:/pdrive/folderList2.pd?fd_id="+fd_id+"&dr_id="+dr_id;
+	}//폴더 생성 createfolder2
+	
 	@RequestMapping(value="/pdrive/folderList2.pd" ,method = RequestMethod.POST)
 	public String folderlist2(@RequestParam("fd_id") int fd_id,HttpServletRequest request,@RequestParam("file") MultipartFile uploadedFile,Model model)throws IOException {
 		Files files = new Files();

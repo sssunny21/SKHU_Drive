@@ -8,6 +8,7 @@ public interface DriveMapper {
 	List<Drive> selectDriveInfo(int id2);
 	List<Folder> selectFolderAll();
 	Folder selectBydr_id(int dr_id);
+	Folder selectByfd_id(int fd_id);
 	Drive selectDrive(int drive_id);
 	List<Folder> selectBydr_id1(int drive_id);
 	List<Folder> selectBydr_id2(int drive_id);

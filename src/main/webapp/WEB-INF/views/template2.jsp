@@ -5,7 +5,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-	<tiles:insertAttribute name="head" />
+<tiles:insertAttribute name="head" />
 </head>
 <body>
 	<tiles:insertAttribute name="menu" />
@@ -15,10 +15,20 @@
 			<tiles:insertAttribute name="content2" />
 		</div>
 		<c:if test="${ not empty errorMsg }">
-			<div class="alert alert-error">${ errorMsg }</div>
+			<div class="alert alert-danger alert-dismissible fade in" role="alert">
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+					<span aria-hidden="true">x</span>
+				</button>
+				<strong>${ errorMsg }</strong>
+			</div>
 		</c:if>
 		<c:if test="${ not empty successMsg }">
-			<div class="alert alert-success">${ successMsg }</div>
+		<div class="alert alert-success alert-dismissible fade in" role="alert">
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+					<span aria-hidden="true">x</span>
+				</button>
+				<strong>${ successMsg }</strong>
+			</div>
 		</c:if>
 		<tiles:insertAttribute name="footer" />
 	</div>

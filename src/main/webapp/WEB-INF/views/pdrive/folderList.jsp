@@ -52,7 +52,7 @@
 					<c:forEach var="dr1" items="${dr1}">
 						<c:choose>
 							<c:when test="${dr1.parent_id==0}">
-								<tr data-url="folderList2.pd?fd_id=${dr1.folder_id}" data-id="${dr1.folder_id}">
+								<tr data-url="folderList2.pd?fd_id=${dr1.folder_id}&dr_id=${dr1.drive_id}" data-id="${dr1.folder_id}">
 									<td>
 										<div class="checkbox" style="margin-top: 0px; margin-bottom: 0px;">
 											<label><input type="checkbox" name="folder_id" value="${dr1.folder_id}"></label>
@@ -85,7 +85,7 @@
 			</thead>
 			<tbody>
 				<c:forEach var="dr2" items="${dr2}">
-					<tr data-url="fileList.pd?fd_id=${dr2.sfolder_id }">
+					<tr data-url="folderList2.pd?fd_id=${dr2.sfolder_id }">
 						<td>
 							<div class="checkbox"
 								style="margin-top: 0px; margin-bottom: 0px;">
