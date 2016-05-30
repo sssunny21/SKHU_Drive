@@ -16,6 +16,7 @@ public class User {
 	int u_auth;
 	int d_id;
 	String u_email2; 
+	String professor_code;
 	
 	//사용자가 즐겨찾는 폴더
 	int join_id;
@@ -174,6 +175,13 @@ public class User {
 	public void setDrive_name(String drive_name) {
 		this.drive_name = drive_name;
 	}
+	
+	public String getProfessor_code() {
+		return professor_code;
+	}
 
-
+	public void setProfessor_code(String professor_code) {
+		this.professor_code = professor_code;
+	}
+    
 }

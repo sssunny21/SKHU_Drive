@@ -4,7 +4,6 @@ class Department {
 	
     int d_id;
     String d_name;
-    
     public int getD_id() {
 		return d_id;
 	}
@@ -20,5 +19,9 @@ class Department {
 	public void setD_name(String d_name) {
 		this.d_name = d_name;
 	}
+
+	
+
+    
 
 }

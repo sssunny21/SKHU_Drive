@@ -14,6 +14,19 @@ public class UserService {
 	@Autowired
 	UserMapper userMapper;
 
+	
+	public String validateBeforeInsertP(User user) throws Exception {
+		String s = user.getProfessor_code();
+		if (StringUtils.isBlank(s))
+			return "교수 코드를 입력하세요.";
+		
+		String professor_code = "test123"; 
+		if(s.equals(professor_code)==false)
+			return "교수코드가 일치하지 않습니다.";
+			
+		return null;
+	}
+
 	public String validateBeforeInsert(User user) throws Exception {
 		String s = user.getU_name();
 		if (StringUtils.isBlank(s))
@@ -39,11 +52,7 @@ public class UserService {
 		s = user.getU_apw();
 		if (StringUtils.isBlank(s))
 			return "질문에 대한 답을 입력하세요.";
-
-
-		User user2=userMapper.selectByU_id(s);
-		if(user2!=null)
-			return "로그인ID가 중복됩니다.";
+		
 		return null;
 	}
 
@@ -124,7 +133,7 @@ public class UserService {
 
 	   }
 	   
-	   public String printAuth(User user) throws Exception {
+ public String printAuth(User user) throws Exception {
 		   String name = user.getU_name();
 		   int auth = user.getU_auth();
 		   String print=null;

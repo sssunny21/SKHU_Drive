@@ -15,15 +15,16 @@
 			<tiles:insertAttribute name="content2" />
 		</div>
 		<c:if test="${ not empty errorMsg }">
-			<div class="alert alert-danger alert-dismissible fade in" role="alert">
-				<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-					<span aria-hidden="true">x</span>
-				</button>
-				<strong>${ errorMsg }</strong>
+			<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+			  <div class="modal-dialog modal-sm">
+			    <div class="modal-content">
+			     	<strong>${ errorMsg }</strong>
+			    </div>
+			  </div>
 			</div>
 		</c:if>
 		<c:if test="${ not empty successMsg }">
-		<div class="alert alert-success alert-dismissible fade in" role="alert">
+			<div class="alert alert-success alert-dismissible fade in" role="alert">
 				<button type="button" class="close" data-dismiss="alert" aria-label="Close">
 					<span aria-hidden="true">x</span>
 				</button>

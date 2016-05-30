@@ -43,7 +43,7 @@ select[name=od] {
 </style>
 <script>
 	$(function() {
-		$("tbody tr").click(function() {
+		$("tbody div tr").click(function() {
 			location.href = $(this).attr("data-url");
 		});
 		$("div.pagination a").click(function() {
@@ -96,15 +96,18 @@ select[name=od] {
 					</tr>
 				</thead>
 				<tbody>
-					<c:forEach var="user" items="${ list }">
-						<tr data-url="user_edit.pd?id=${ user.id }&${pagination.queryString}">
-							<td>${ user.u_id }</td>
-							<td>${ user.u_name }</td>
-							<td>${ user.u_email }</td>
-							<td>${ user.u_tel }</td>
-							<td>${ user.u_grade }</td>
-						</tr>
-					</c:forEach>
+					<div>
+						<c:forEach var="user" items="${ list }">
+							<tr
+								data-url="user_edit.pd?id=${ user.id }&${pagination.queryString}">
+								<td>${ user.u_id }</td>
+								<td>${ user.u_name }</td>
+								<td>${ user.u_email }</td>
+								<td>${ user.u_tel }</td>
+								<td>${ user.u_grade }</td>
+							</tr>
+						</c:forEach>
+					</div>
 				</tbody>
 			</table>
 			<form:select path="sz" data-auto-submit="true">

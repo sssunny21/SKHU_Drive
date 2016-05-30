@@ -31,10 +31,69 @@ public class UserController {
 			model.addAttribute("myfolder",myfolder);
 			List<Drive> mydrive = userMapper.selectMyDrive(u.getId());
 			model.addAttribute("mydrive",mydrive);
+		      Drive user_drive = userMapper.selectDrive(u.getId());//나의 드라이브
+		      model.addAttribute("drive",user_drive);
 		}
 		return "user/mypage";
 	}
 
+	
+
+	@RequestMapping(value="/home/join_main.pd", method=RequestMethod.GET)
+	public String join_main(User user, Model model) {
+		return "home/join_main";
+	}
+	
+	@RequestMapping(value="/home/join_main.pd", method=RequestMethod.POST)
+	public String join_main(Model model,User user ) throws Exception{
+		String message = userService.validateBeforeInsertP(user);
+		if (message == null){
+			return "redirect:/home/professor_join.pd";
+		}else{
+			model.addAttribute("errorMsg", message);
+		}
+		return "home/join_main";
+	}
+	
+	@RequestMapping(value="/home/professor_join.pd")
+	public String professor_join(User user, Model model) throws Exception{
+		User user2=userMapper.selectByU_id(user.u_id);
+		if(user2==null){
+		String message = userService.validateBeforeInsert(user);
+		if (message == null){
+			userMapper.insertP(user);
+			userMapper.insert_drive(user);
+			model.addAttribute("successMsg", "저장했습니다."); 
+		}else{
+			model.addAttribute("errorMsg", message);
+		}
+		}else{
+			model.addAttribute("errorMsg", "해당 아이디가 존재합니다");
+		}
+		return "home/professor_join";
+	}
+	
+	@RequestMapping(value="/home/user_join.pd")
+	public String user_join(User user, Model model) throws Exception{
+		User user2=userMapper.selectByU_id(user.u_id);
+		if(user2==null){
+		String message = userService.validateBeforeInsert(user);
+		if (message == null){
+			userMapper.insert(user);
+			userMapper.insert_drive_user(user);
+			model.addAttribute("successMsg", "저장했습니다.");
+			
+		}else{
+			model.addAttribute("errorMsg", message);
+		}
+		}else{
+			model.addAttribute("errorMsg", "해당 아이디가 존재합니다");
+		}
+		return "home/user_join";
+	}
+
+
+	
 	@RequestMapping(value="/user/mypage.pd",method = RequestMethod.POST,params="cmd=deleteFavorite")
 	public String deletefavorite(@RequestParam("folder_id") int[] folder_id,Model model){
 		User u = (User)userService.getCurrentUser();
@@ -59,25 +118,17 @@ public class UserController {
 		model.addAttribute("mydrive",mydrive);
 		return "user/mypage";
 	}
-	
-
-	@RequestMapping(value="/home/join.pd")
-	public String join(User user, Model model) throws Exception{
-		String message = userService.validateBeforeInsert(user);
-		if (message == null){
-			userMapper.insert(user);
-			model.addAttribute("successMsg", "저장했습니다.");
-		}else{
-			model.addAttribute("errorMsg", message);
-		}
-		return "home/join";
-	}
 
 
 	@RequestMapping(value="/user/myinfo_edit.pd", method=RequestMethod.GET)
 	public String myinfo_edit(Model model) {
 		model.addAttribute("user", UserService.getCurrentUser());
 		model.addAttribute("department", departmentMapper.selectAll());
+    	if(UserService.getCurrentUser()!=null){
+  	      User u = (User)UserService.getCurrentUser();
+		      Drive user_drive = userMapper.selectDrive(u.getId());//나의 드라이브
+		      model.addAttribute("drive",user_drive);
+  	      }
 		return "user/myinfo_edit";
 	}
 
@@ -101,6 +152,11 @@ public class UserController {
 
 	@RequestMapping(value="/user/myinfo_pw.pd", method=RequestMethod.GET)
 	public String myinfo_pw(User user, Model model) {
+    	if(UserService.getCurrentUser()!=null){
+  	      User u = (User)UserService.getCurrentUser();
+		      Drive user_drive = userMapper.selectDrive(u.getId());//나의 드라이브
+		      model.addAttribute("drive",user_drive);
+  	      }
 		return "user/myinfo_pw";
 	}
 

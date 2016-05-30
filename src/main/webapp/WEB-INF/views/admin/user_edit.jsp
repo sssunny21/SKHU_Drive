@@ -23,17 +23,13 @@ label {
 	<br>
 	<label>학년 </label>
 	<br>
-	<label class="radio-inline"> <input type="radio" name="u_grade"
-		id="1" value="1" />1
+	<label class="radio-inline"> <input type="radio" name="u_grade" id="1" value="1" />1
 	</label>
-	<label class="radio-inline"> <input type="radio" name="u_grade"
-		id="2" value="2" />2
+	<label class="radio-inline"> <input type="radio" name="u_grade" id="2" value="2" />2
 	</label>
-	<label class="radio-inline"> <input type="radio" name="u_grade"
-		id="3" value="3" />3
+	<label class="radio-inline"> <input type="radio" name="u_grade" id="3" value="3" />3
 	</label>
-	<label class="radio-inline"> <input type="radio" name="u_grade"
-		id="4" value="4" />4
+	<label class="radio-inline"> <input type="radio" name="u_grade" id="4" value="4" />4
 	</label>
 	<br>
 	<label>비밀번호 찾기 질문 </label>
@@ -45,7 +41,7 @@ label {
 
 	<label>학과 </label>
 	<form:select path="d_id">
-		<form:option value="" label="없음" />
+		<form:option value="0" label="없음" />
 		<form:options itemValue="d_id" itemLabel="d_name" items="${ department }" />
 	</form:select>
 	<div>

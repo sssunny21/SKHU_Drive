@@ -5,11 +5,13 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 public interface DriveMapper {
-	List<Drive> selectDriveInfo(int id2);
+	List<Drive> selectDriveInfo(int d_id);
 	List<Folder> selectFolderAll();
 	Folder selectBydr_id(int dr_id);
 	Folder selectByfd_id(int fd_id);
+	Folder selectBySfd_id(int sfolder_id);
 	Drive selectDrive(int drive_id);
+	
 	List<Folder> selectBydr_id1(int drive_id);
 	List<Folder> selectBydr_id2(int drive_id);
 	List<Folder> selectBypr_id (int parent_id);
@@ -17,6 +19,10 @@ public interface DriveMapper {
 	Files selectByff_id(int files_id);
 	void insert_folder(Folder folder);
 	void insert_folder2(Folder folder);
+	
+	void update_folder(Folder folder);
+	void update_sfolder(Folder folder);
+	
 	void insert_sfolder(Folder folder);
 	void insert_files(Files files);
 	void deleteFolder(int folder_id);

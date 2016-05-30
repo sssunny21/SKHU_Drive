@@ -11,17 +11,31 @@ public class DriveService {
 	@Autowired
 	DriveMapper driveMapper;
 	
-	public String validatepw(Folder folder) throws Exception {
-        String s = folder.getSfolder_pw();
+	public String editsFolder(Folder folder) throws Exception {
+		
+        String s = folder.getSfolder_name();
+        if (StringUtils.isBlank(s))
+            return "폴더이름을 입력해주세요.";
+        
+      s = folder.getSfolder_pw();
         if (StringUtils.isBlank(s))
             return "비밀번호를 입력해주세요.";
+
+        return null;
+    }
+	
+	public String editFolder(Folder folder) throws Exception {
+        String s = folder.getFolder_name();
+        if (StringUtils.isBlank(s))
+            return "폴더이름을 입력해주세요.";
+
         return null;
     }
 	
 	public boolean isAuthor(Drive drive){
 		return(UserService.getCurrentUser()!=null)&&
 				(drive.getId()==UserService.getCurrentUser().getId());
-	}
+	}//로그인한 사용자가 드라이브 소유자인지 검사
 	
 	public boolean canCreate(int sfolder_id){
 		User user = UserService.getCurrentUser();

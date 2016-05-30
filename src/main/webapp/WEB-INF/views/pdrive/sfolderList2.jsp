@@ -19,44 +19,8 @@ input[type=file] {
 	<div class="header clearfix" style="margin-top: 0px;">
 		<nav>
 			<ul class="nav nav-pills pull-right">
-				<li><button type="button" class="btn btn-primary"
-						data-toggle="modal" data-target=".bs-example-modal-sm">폴더
-						생성</button></li>
-				<form:form method="post" modelAttribute="folder">
-					<div class="modal fade bs-example-modal-sm" tabindex="-1"
-						role="dialog" aria-labelledby="mySmallModalLabel">
-						<div class="modal-dialog modal-sm">
-							<div class="modal-header">
-								<button type="button" class="close" data-dismiss="modal"
-									aria-label="Close">
-									<span aria-hidden="true">&times;</span>
-								</button>
-								<h4 class="modal-title">폴더 생성</h4>
-							</div>
-							<div class="modal-body">
-								<label>공유 여부 </label>
-								<div class="checkbox">
-									<input type="checkbox" id="share_tn">공유폴더
-								</div>
-								<div id="share_n">
-									<label>폴더 이름 </label>
-									<form:input path="folder_name" />
-									<br>
-									<form:hidden path="drive_id" id="dr_id" name="dr_id" />
-									<form:hidden path="folder_id" id="parent_id" name="parent_id" />
-								</div>
-							</div>
-							<div class="modal-footer">
-								<button type="button" class="btn btn-default"
-									data-dismiss="modal">닫기</button>
-								<button class="btn" type="submit" name="cmd"
-									value="createfolder2">만들기</button>
-							</div>
-						</div>
-					</div>
-				</form:form>
-				<li role="presintation"><a href="#">파일 업로드</a></li>
-				<li role="presintation"><a href="#">파일 다운로드</a></li>
+				<li role="presintation"><a href="#">전체 선택</a></li>
+				<li role="presintation"><a href="#">파일 내리기</a></li>
 				<li role="presintation"><a href="#">삭제</a></li>
 				<li class="dropdown"><a href="#" class="dropdown-toggle"
 					data-toggle="dropdown" role="button" aria-haspopup="true"
@@ -93,26 +57,63 @@ input[type=file] {
 					<c:forEach var="pr" items="${pr}">
 						<c:choose>
 							<c:when test="${pr.folder_id!=pr.parent_id}">
-								<tr
-									data-url="folderList2.pd?fd_id=${pr.folder_id}&dr_id=${pr.drive_id}">
+								<tr>
 									<td>
-										<div class="checkbox" style="margin-top: 0px; margin-bottom: 0px;">
-											<label><input type="checkbox" name="folder_id" value="${pr.folder_id}"></label>
+										<div class="checkbox"
+											style="margin-top: 0px; margin-bottom: 0px;">
+											<label><input type="checkbox" name="folder_id"
+												value="${pr.folder_id}"></label>
 										</div>
 									</td>
-									<td>${pr.folder_name}</td>
+									<td data-url="folderList2.pd?fd_id=${pr.folder_id}" >${pr.folder_name}</td>
 									<td data-url="#">${pr.folder_id }</td>
 								</tr>
 							</c:when>
 						</c:choose>
+
 					</c:forEach>
 				</tbody>
 			</table>
 			<button class="btn" type="submit" name="cmd" value="saveFavorites">즐겨찾기</button>
-			<button class="btn" type="submit" name="cmd" value="deleteFolder2">삭제</button>
+			<button class="btn" type="submit" name="cmd" value="deleteFolder">삭제</button>
 		</form:form>
 	</div>
+	<button type="button" class="btn btn-primary" data-toggle="modal"
+		data-target=".bs-example-modal-sm">폴더 생성</button>
+	<form:form method="post" modelAttribute="folder">
+		<div class="modal fade bs-example-modal-sm" tabindex="-1"
+			role="dialog" aria-labelledby="mySmallModalLabel">
+			<div class="modal-dialog modal-sm">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title">폴더 생성</h4>
+				</div>
+				<div class="modal-body">
+				<c:forEach var="pr" items="${pr}" begin="1" end="1">
+					<label>공유 여부 </label>
+					<div class="checkbox">
+						<input type="checkbox" id="share_tn">공유폴더
+					</div>
+					<div id="share_n">
+						<label>폴더 이름 </label>
+						<form:input path="folder_name"/>
+						<br>
+						<input id="drive_id" name="drive_id" type="hidden" value="${pr.drive_id }"/>
+						<form:hidden path="folder_id" id="parent_id" name="parent_id"/>
+					</div>
+				</c:forEach>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+					<button class="btn" type="submit" name="cmd" value="createfolder2">만들기</button>
+				</div>
 
+			</div>
+		</div>
+	</form:form>
 	<div class="table-responsive">
 		<form:form method="post" id="formfiles">
 			<table class="table table-striped">

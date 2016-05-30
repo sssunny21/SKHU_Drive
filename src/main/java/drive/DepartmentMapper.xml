@@ -7,10 +7,9 @@
     <select id="selectAll" resultType="drive.Department">
         SELECT * FROM [department]
     </select>
-    
-    <select id="selectD_name" resultType="drive.Department">
+
+ <select id="selectD_name" resultType="drive.Department">
     	SELECT * FROM [department]
     	WHERE d_id=#{d_id}
     </select>
-
 </mapper>

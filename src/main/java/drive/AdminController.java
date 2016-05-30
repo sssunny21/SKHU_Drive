@@ -10,23 +10,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class AdminController {
 	@Autowired UserMapper userMapper;
 	@Autowired UserService userService;
-	@Autowired ProfessorService professorService;
 	@Autowired DepartmentMapper departmentMapper;
-	@Autowired ProfessorMapper professorMapper;
-
 	
 	@RequestMapping("/admin/user_list.pd") 
 	public String user_list(Model model,Pagination pagination) { 
 		pagination.setRecordCount(userMapper.selectCount(pagination));
 		model.addAttribute("list", userMapper.selectPage(pagination)); 
 		return "admin/user_list"; 
-	} 
-	
-	@RequestMapping("/admin/professor_list.pd") 
-	public String profassor_list(Model model,Pagination pagination) { 
-		pagination.setRecordCount(professorMapper.selectCount1(pagination));
-		model.addAttribute("list", professorMapper.selectPage1(pagination)); 
-		return "admin/professor_list"; 
 	} 
 	
 	
@@ -54,24 +44,4 @@ public class AdminController {
 	}
 	 
 	
-	@RequestMapping(value="/admin/professor_edit.pd", method = RequestMethod.GET)
-	public String professor_edit(@RequestParam("id2") Integer id2,Pagination pagination, Model model) {
-		Professor professor = professorMapper.selectByPId(id2);
-		model.addAttribute("professor", professor);
-		model.addAttribute("department", departmentMapper.selectAll());
-		return "admin/professor_edit";
-	}
-
-	@RequestMapping(value="/admin/professor_edit.pd", method = RequestMethod.POST)
-	public String professor_edit(Professor professor,Pagination pagination, Model model) throws Exception{
-		String message = professorService.validateBeforeUpdate(professor);
-		if (message == null){
-			professorMapper.updateP(professor);
-			//model.addAttribute("successMsg", "저장했습니다.");
-			return "redirect:/admin/professor_list.pd";
-		}else{
-			model.addAttribute("errorMsg", message);
-			return "admin/professor_edit";
-		}
-	}
 }

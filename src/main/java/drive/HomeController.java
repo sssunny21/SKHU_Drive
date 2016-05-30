@@ -27,8 +27,11 @@ public class HomeController {
       model.addAttribute("myfolder",myfolder);
       List<Drive> mydrive = userMapper.selectMyDrive(u.getId());
       model.addAttribute("mydrive",mydrive);
-      String auth = userService.printAuth(u);
+      Drive user_drive = userMapper.selectDrive(u.getId());//나의 드라이브
+      model.addAttribute("drive",user_drive);
+      String auth = userService.printAuth(u);//권한표시
       model.addAttribute("auth",auth);
+      
       }
         return "home/index";
     }
@@ -52,13 +55,15 @@ public class HomeController {
     public String menu(Model model) throws Exception{
     	if(UserService.getCurrentUser()!=null){
     	      User u = (User)UserService.getCurrentUser();
-    	      String auth = userService.printAuth(u);
-    	      model.addAttribute("auth",auth);
+    	      String auth = userService.printAuth(u);//권한표시
+    	     model.addAttribute("auth",auth);
+		      Drive user_drive = userMapper.selectDrive(u.getId());//나의 드라이브
+		      model.addAttribute("drive",user_drive);
     	      }
     	return "include/menu";
     }
     
-
+    
     @RequestMapping(value="/home/sechPW.pd", method=RequestMethod.GET)
     public String sechPW(User user, Model model) {
        model.addAttribute("user", user);

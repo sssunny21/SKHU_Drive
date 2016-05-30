@@ -8,10 +8,6 @@
 	<div class="header clearfix" style="margin-top: 0px;">
 		<nav>
 			<ul class="nav nav-pills pull-right">
-				<!--
-				<li role="presintation"><a href="#" onload="createFdPopup()"
-					onclick="createFdPopup(${drive.drive_id})">폴더생성</a></li>
-				-->
 				<li class="dropdown"><a href="#" class="dropdown-toggle"
 					data-toggle="dropdown" role="button" aria-haspopup="true"
 					aria-expanded="false">정렬 <span class="caret"></span></a>
@@ -46,6 +42,7 @@
 				</thead>
 				<tbody>
 					<c:forEach var="drive" items="${main}">
+					<c:if test="${drive.d_auth eq 2 }">
 						<tr data-url="folderList.pd?dr_id=${drive.drive_id }">
 							<td>
 								<div class="checkbox"
@@ -57,6 +54,7 @@
 							<td>${drive.drive_name}</td>
 							<td>${drive.u_name}</td>
 						</tr>
+						</c:if>
 					</c:forEach>
 				</tbody>
 			</table>
@@ -65,4 +63,3 @@
 	</div>
 </div>
 <div id="popupCreate" style="display: none;"></div>
-

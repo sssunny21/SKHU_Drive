@@ -53,7 +53,7 @@ label {
 
 	<label>학과 </label>
 	<form:select path="d_id">
-		<form:option value="" label="없음" />
+		<form:option value="0" label="없음" />
 		<form:options itemValue="d_id" itemLabel="d_name"
 			items="${ department }" />
 	</form:select>
