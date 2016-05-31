@@ -19,9 +19,8 @@ input[type=file] {
 	<div class="header clearfix" style="margin-top: 0px;">
 		<nav>
 			<ul class="nav nav-pills pull-right">
-				<li><button type="button" class="btn btn-primary"
-						data-toggle="modal" data-target=".bs-example-modal-sm">폴더
-						생성</button></li>
+				<li><img src="/drive/res/images/add-256.png" style="width:37px; height:37px;"
+						data-toggle="modal" data-target=".bs-example-modal-sm"></li>
 				<form:form method="post" modelAttribute="folder">
 					<div class="modal fade bs-example-modal-sm" tabindex="-1"
 						role="dialog" aria-labelledby="mySmallModalLabel">
@@ -55,7 +54,18 @@ input[type=file] {
 						</div>
 					</div>
 				</form:form>
-				<li role="presintation"><a href="#">파일 업로드</a></li>
+				<li>
+					<form id="uploadform" method="post" enctype="multipart/form-data">
+						<div class="form-group">
+							<img src="/drive/res/images/icon-upload-256.png" style="width: 50px; height:40px;" onclick="document.getElementById('file').click();"/>
+								<input type="file" id="file" name="file"
+									style="display:none;" onchange="document.getElementById('uploadform').value=this.value"/>
+							
+							<!--<input type="submit" value="업로드">
+						<img src="/drive/res/images/icon-upload-256.png" style="width: 29px; height:25px;"/>-->
+						</div>
+					</form>
+				</li>
 				<li role="presintation"><a href="#">파일 다운로드</a></li>
 				<li role="presintation"><a href="#">삭제</a></li>
 				<li class="dropdown"><a href="#" class="dropdown-toggle"
@@ -96,8 +106,10 @@ input[type=file] {
 								<tr
 									data-url="folderList2.pd?fd_id=${pr.folder_id}&dr_id=${pr.drive_id}">
 									<td>
-										<div class="checkbox" style="margin-top: 0px; margin-bottom: 0px;">
-											<label><input type="checkbox" name="folder_id" value="${pr.folder_id}"></label>
+										<div class="checkbox"
+											style="margin-top: 0px; margin-bottom: 0px;">
+											<label><input type="checkbox" name="folder_id"
+												value="${pr.folder_id}"></label>
 										</div>
 									</td>
 									<td>${pr.folder_name}</td>
@@ -149,10 +161,5 @@ input[type=file] {
 			<button class="btn" type="submit" name="cmd" value="deleteFiles">삭제</button>
 		</form:form>
 	</div>
-	<form method="post" enctype="multipart/form-data">
-		<div class="form-group">
-			<label>file</label> <input type="file" id="file" name="file">
-			<input type="submit" value="업로드">
-		</div>
-	</form>
+
 </div>

@@ -84,7 +84,7 @@
 											<label><input type="checkbox" name="folder_id" value="${dr1.folder_id}"></label>
 										</div>
 									</td>
-									<td>${dr1.folder_name}</td>
+									<td><img src="/drive/res/images/folder-2-256.png" style="width: 22px; height:18px;"/> ${dr1.folder_name}</td>
 									<td data-url="#">미정</td>
 									<td id="edit" class="btn btn-primary" role="presintation"
 										onload="editFdPopup()" onclick="editFdPopup(${dr1.folder_id})">
@@ -94,27 +94,7 @@
 						</c:choose>
 					</c:forEach>
 				</tbody>
-			</table>
-			<button class="btn" type="submit" name="cmd" value="saveFavorites">즐겨찾기</button>
-			<button class="btn" type="submit" name="cmd" value="deleteFolder">삭제</button>
-		</form:form>
-	</div>
-	
-	<div class="table-responsive">
-		<table class="table table-striped" id="sfoldercheck">
-			<thead>
-				<tr>
-					<th>
-						<div class="checkbox" style="margin-top: 0px; margin-bottom: 0px;">
-							<label><input type="checkbox"></label>
-						</div>
-					</th>
-					<th>폴더 이름</th>
-					<th>폴더 사이즈</th>
-					<th></th>
-				</tr>
-			</thead>
-			<tbody>
+				<tbody>
 				<c:forEach var="dr2" items="${dr2}">
 					<tr
 						data-url="folderList2.pd?fd_id=${dr2.sfolder_id }&dr_id=${dr2.drive_id}">
@@ -124,7 +104,7 @@
 								<label><input type="checkbox"></label>
 							</div>
 						</td>
-						<td>${dr2.sfolder_name}</td>
+						<td><img src="/drive/res/images/cloud-key-lock-256.png" style="width: 22px; height:18px;"/> ${dr2.sfolder_name}</td>
 						<td data-url="#">미정</td>
 						<td id="edit" class="btn btn-primary" role="presintation"
 							onload="editSFdPopup()" onclick="editSFdPopup(${dr2.sfolder_id})">
@@ -132,6 +112,10 @@
 					</tr>
 				</c:forEach>
 			</tbody>
-		</table>
+			</table>
+			<button class="btn" type="submit" name="cmd" value="saveFavorites">즐겨찾기</button>
+			<button class="btn" type="submit" name="cmd" value="deleteFolder">삭제</button>
+		</form:form>
 	</div>
+
 </div>

@@ -19,6 +19,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 
 
 @Controller
@@ -91,14 +93,15 @@ public class DriveController {
 	
 	@Secured("ROLE_1")
 	@RequestMapping(value="/pdrive/folderList.pd" ,method = RequestMethod.POST,params="cmd=createfolder")
-	public String createfolder(@RequestParam("dr_id") int dr_id,Folder folder,Model model) throws Exception {
+	public String createfolder(@RequestParam("dr_id") int dr_id,Folder folder,RedirectAttributes redirectAttributes) throws Exception {
 		String message = driveService.editsFolder(folder);
 		Drive drive = new Drive();
 		drive = driveMapper.selectDrive(dr_id);
 		if (driveService.isAuthor(drive)){//드라이브 소유자 검사
 			driveMapper.insert_folder(folder);
+			redirectAttributes.addFlashAttribute("successMsg", "완료하였습니다.");
 		}else{
-			model.addAttribute("errorMsg", "폴더 생성 권한이 없습니다.");
+			redirectAttributes.addFlashAttribute("errorMsg", "폴더 생성 권한이 없습니다.");
 		}
 		return "redirect:/pdrive/folderList.pd?dr_id="+dr_id;
 	}//폴더 생성 createfolder
@@ -125,24 +128,17 @@ public class DriveController {
 	
 	@Secured("ROLE_1")
 	@RequestMapping(value="/pdrive/folderList.pd",method = RequestMethod.POST,params="cmd=deleteFolder")
-	public String deletefolder(@RequestParam("dr_id") int dr_id,@RequestParam("folder_id") int[] folder_id,Model model){
+	public String deletefolder(@RequestParam("dr_id") int dr_id,@RequestParam("folder_id") int[] folder_id,RedirectAttributes redirectAttributes){
 		Drive drive = new Drive();
 		drive = driveMapper.selectDrive(dr_id);
 		if (driveService.isAuthor(drive)){//폴더 삭제 권한 확인
 			for(int i=0 ; i<folder_id.length; ++i){
 				driveMapper.deleteFolder(folder_id[i]);
 			}
+			redirectAttributes.addFlashAttribute("successMsg", "삭제를 완료하였습니다.");
 		}else{
-			model.addAttribute("errorMsg", "폴더 삭제 권한이 없습니다.");
+			redirectAttributes.addFlashAttribute("errorMsg", "폴더 삭제 권한이 없습니다.");
  		}
-		
-		User u = (User)userService.getCurrentUser();
-		List<Folder> dr1 = driveMapper.selectBydr_id1(dr_id);
-		List<Folder> dr2 = driveMapper.selectBydr_id2(dr_id);
-		model.addAttribute("dr1", dr1);
-		model.addAttribute("dr2", dr2);
-		List<Folder> myfolder = userMapper.selectMyFolder(u.getId()); 
-		model.addAttribute("myfolder",myfolder);
 		return "redirect:/pdrive/folderList.pd?dr_id="+dr_id;
 	}//폴더 삭제
 	
@@ -202,21 +198,22 @@ public class DriveController {
 	
 	@Secured("ROLE_1")
 	@RequestMapping(value="/pdrive/folderList2.pd" ,method = RequestMethod.POST,params="cmd=createfolder2")
-	public String createfolder2(@RequestParam("fd_id") int fd_id,@RequestParam("dr_id") int dr_id,Folder folder,Model model) throws Exception {
+	public String createfolder2(@RequestParam("fd_id") int fd_id,@RequestParam("dr_id") int dr_id,Folder folder,RedirectAttributes redirectAttributes) throws Exception {
 		String message = driveService.editsFolder(folder);
 		Drive drive = new Drive();
 		drive = driveMapper.selectDrive(dr_id);
 		if (driveService.isAuthor(drive)){//폴더 생성 권한 확인
 			driveMapper.insert_folder2(folder);
+			redirectAttributes.addFlashAttribute("successMsg", "완료하였습니다.");
 		}else{
-			model.addAttribute("errorMsg", "폴더 생성 권한이 없습니다.");
+			redirectAttributes.addFlashAttribute("errorMsg", "폴더 생성 권한이 없습니다.");
 		}
 		return "redirect:/pdrive/folderList2.pd?fd_id="+fd_id+"&dr_id="+dr_id;
 	}//서브 폴더 생성
 	
 	@Secured("ROLE_1")
 	@RequestMapping(value="/pdrive/folderList2.pd",method = RequestMethod.POST,params="cmd=deleteFolder2")
-	public String deletefolder2(@RequestParam("fd_id") int fd_id,@RequestParam("folder_id") int[] folder_id,@RequestParam("dr_id") int dr_id,Model model){
+	public String deletefolder2(@RequestParam("fd_id") int fd_id,@RequestParam("folder_id") int[] folder_id,@RequestParam("dr_id") int dr_id,Model model,RedirectAttributes redirectAttributes){
 		User u = (User)userService.getCurrentUser();
 		Drive drive = new Drive();
 		drive = driveMapper.selectDrive(dr_id);
@@ -225,17 +222,17 @@ public class DriveController {
 				driveMapper.deleteFolder(folder_id[i]);
 				folderlist2(folder_id[i],dr_id,model);
 			}
+			redirectAttributes.addFlashAttribute("successMsg", "삭제를 완료하였습니다.");
 		}else{
-			model.addAttribute("errorMsg", "폴더 삭제 권한이 없습니다.");
+			redirectAttributes.addFlashAttribute("errorMsg", "폴더 삭제 권한이 없습니다.");
 		}
-		List<Folder> myfolder = userMapper.selectMyFolder(u.getId()); 
-		model.addAttribute("myfolder",myfolder);
+		
 		return "redirect:/pdrive/folderList2.pd?fd_id="+fd_id+"&dr_id="+dr_id;
 	}//서브 폴더 삭제
 	
 	@Secured("ROLE_1")
 	@RequestMapping(value="/pdrive/folderList2.pd" ,method = RequestMethod.POST)
-	public String folderlist2(@RequestParam("fd_id") int fd_id,@RequestParam("dr_id") int dr_id,HttpServletRequest request,@RequestParam("file") MultipartFile uploadedFile,Model model)throws IOException {
+	public String folderlist2(@RequestParam("fd_id") int fd_id,@RequestParam("dr_id") int dr_id,HttpServletRequest request,@RequestParam("file") MultipartFile uploadedFile,RedirectAttributes redirectAttributes)throws IOException {
 		Files files = new Files();
 		files.setFolder_id(fd_id);
 		files.setFiles_name(Paths.get(uploadedFile.getOriginalFilename()).getFileName().toString());
@@ -246,15 +243,16 @@ public class DriveController {
 		drive = driveMapper.selectDrive(dr_id);
 		if (driveService.isAuthor(drive)){//폴더 삭제 권한 확인
 			driveMapper.insert_files(files);
+			redirectAttributes.addFlashAttribute("successMsg", "업로드를 완료하였습니다.");
 		}else{
-			model.addAttribute("errorMsg", "파일 업로드 권한이 없습니다.");
+			redirectAttributes.addFlashAttribute("errorMsg", "파일 업로드 권한이 없습니다.");
 		}
 		return "redirect:/pdrive/folderList2.pd?fd_id="+fd_id+"&dr_id="+dr_id;
 	}//서브 폴더 파일업로드
 	
 	@Secured("ROLE_1")
 	@RequestMapping(value="/pdrive/folderList2.pd",method = RequestMethod.POST,params="cmd=deleteFiles")
-	public String deletefiles(@RequestParam("fd_id") int fd_id,@RequestParam("dr_id") int dr_id,@RequestParam("files_id") int[] files_id,Model model){
+	public String deletefiles(@RequestParam("fd_id") int fd_id,@RequestParam("dr_id") int dr_id,@RequestParam("files_id") int[] files_id,RedirectAttributes redirectAttributes){
 		User u = (User)userService.getCurrentUser();
 		Drive drive = new Drive();
 		drive = driveMapper.selectDrive(dr_id);
@@ -262,11 +260,11 @@ public class DriveController {
 			for(int i=0 ; i<files_id.length; ++i){
 				driveMapper.deleteFiles(files_id[i]);
 			}
+			redirectAttributes.addFlashAttribute("successMsg", "삭제를 완료하였습니다.");
 		}else{
-			model.addAttribute("errorMsg", "파일 업로드 권한이 없습니다.");
+			redirectAttributes.addFlashAttribute("errorMsg", "파일 삭제 권한이 없습니다.");
 		}
-		List<Folder> myfolder = userMapper.selectMyFolder(u.getId()); 
-		model.addAttribute("myfolder",myfolder);
+		
 		return "redirect:/pdrive/folderList2.pd?fd_id="+fd_id+"&dr_id="+dr_id;
 	}//서브 폴더 파일 삭제
 	

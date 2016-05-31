@@ -23,6 +23,9 @@
 			$("#share_t").toggle();
 			$("#share_n").hide();
 		});
+		$("#file").change(function(){
+			$("#uploadform").submit();
+		});
 		/**
 		$('#btn-upload').click(function(e){
 			e.preventDefault();
