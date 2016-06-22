@@ -133,7 +133,7 @@ public class UserService {
 
 	   }
 	   
- public String printAuth(User user) throws Exception {
+	   public String printAuth(User user) throws Exception {
 		   String name = user.getU_name();
 		   int auth = user.getU_auth();
 		   String print=null;
@@ -142,6 +142,17 @@ public class UserService {
 		   
 		   return print;
 	   }
+	   
+	   public String validatePw(User user,Test test,String password) throws Exception {
+			String s = test.getPassword();
+			if (StringUtils.isBlank(s))
+				return "비밀번호를 입력하세요.";
+			
+			if(s.equals(user.getU_pw())==false)
+				return "비밀번호가 일치하지 않습니다.";
+				
+			return null;
+		}
 
 
 	public static User getCurrentUser() { 

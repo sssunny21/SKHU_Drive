@@ -32,6 +32,23 @@ public class DriveService {
         return null;
     }
 	
+	public String beforePw(Folder folder) throws Exception {
+        String s = folder.getSfolder_pw();
+        if (StringUtils.isBlank(s))
+            return "암호를 입력해주세요.";
+
+        return null;
+    }
+	
+	public boolean eqaulPw(Folder folder,String sfolder_pw){
+		if(folder.getSfolder_pw()==sfolder_pw){
+			return true;
+		}else{
+			return false;
+		}
+	}
+	
+	
 	public boolean isAuthor(Drive drive){
 		return(UserService.getCurrentUser()!=null)&&
 				(drive.getId()==UserService.getCurrentUser().getId());

@@ -28,6 +28,9 @@ public interface UserMapper {
 	void deleteJoinFolder(int folder_id);//폴더 즐겨찾기 해제
 	void deleteJoinDrive(int drive_id);//드라이브 즐겨찾기 해제
 	List<Drive> selectProfessor(int d_id); //학생의 학과를 불러오기위해 유저멤퍼에 저장.
+	
+	   void updateRegistrationId(User user);
+
 }
 
 

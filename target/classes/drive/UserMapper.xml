@@ -19,8 +19,28 @@
 	</select>
 
 	<select id="checkQA" resultType="drive.User">
-		select * from [users]
-		WHERE u_id= #{u_id} AND u_qpw=#{u_qpw} AND u_apw=#{u_apw}
+		SELECT * FROM [users]
+		WHERE u_id=
+		#{u_id} AND u_qpw=#{u_qpw} AND u_apw=#{u_apw}
+	</select>
+
+	<select id="selectMyFolder" resultType="drive.User">
+		SELECT
+		f.drive_id,f.folder_id,f.folder_name FROM my_join_folder m JOIN folder f
+		ON m.folder_id=f.folder_id AND m.id=#{id}
+	</select>
+
+	<select id="selectMyDrive" resultType="drive.User">
+		SELECT
+		d.drive_id,d.drive_name FROM my_join_drive m JOIN drive d
+		ON
+		m.drive_id=d.drive_id AND m.id=#{id}
+	</select>
+
+	<select id="selectDrive" resultType="drive.Drive">
+		SELECT drive_id 
+		FROM drive
+		WHERE id=#{id}
 	</select>
 
 	<select id="selectPage" resultType="drive.User">
@@ -65,6 +85,31 @@
 		VALUES
 		(#{u_id}, #{u_pw}, #{u_name}, #{u_tel}, #{u_email},
 		#{u_grade}, #{u_qpw}, #{u_apw}, 1, #{d_id})
+	</insert>
+	
+	<insert id="insert_drive_user" useGeneratedKeys="true" keyProperty="id">
+		INSERT
+		INTO [drive] (drive_name, d_id,id,d_auth)
+		VALUES
+		(#{u_name},#{d_id},#{id},1)
+	</insert>
+
+	<insert id="insert_drive" useGeneratedKeys="true" keyProperty="id">
+		INSERT
+		INTO [drive] (drive_name, d_id,id,d_auth)
+		VALUES
+		(#{u_name},#{d_id},#{id},2)
+	</insert>
+
+
+	<insert id="insertP" useGeneratedKeys="true" keyProperty="id">
+		INSERT
+		[users]
+		(u_id, u_pw, u_name, u_tel, u_email, u_grade, u_qpw, u_apw,
+		u_auth, d_id)
+		VALUES
+		(#{u_id}, #{u_pw}, #{u_name}, #{u_tel},
+		#{u_email},999, #{u_qpw}, #{u_apw}, 2, #{d_id})
 	</insert>
 
 	<update id="update">
@@ -113,11 +158,27 @@
 
 	<delete id="delete">
 		DELETE FROM [users] WHERE id = #{id}
+		DELETE FROM [drive] WHERE id = #{id}
+	</delete>
+
+	<delete id="deleteJoinFolder">
+		DELETE [my_join_folder] WHERE [folder_id] =
+		#{folder_id}
+	</delete>
+	<delete id="deleteJoinDrive">
+		DELETE [my_join_drive] WHERE [drive_id] = #{drive_id}
 	</delete>
 
 	<select id="selectProfessor" resultType="drive.Drive">
-		SELECT * FROM [professor] WHERE d_id=#{d_id}
+		SELECT * FROM
+		[professor] WHERE d_id=#{d_id}
 	</select>
+	
+	  <update id="updateRegistrationId">
+        UPDATE [users]
+        SET registrationId = #{registrationId}
+        WHERE id = #{id}
+    </update>
 
 
 </mapper>

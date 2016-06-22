@@ -15,8 +15,12 @@ public class User {
 	String u_apw;
 	int u_auth;
 	int d_id;
+	String registrationId;
+	
+
 	String u_email2; 
 	String professor_code;
+	
 	
 	//사용자가 즐겨찾는 폴더
 	int join_id;
@@ -184,4 +188,15 @@ public class User {
 		this.professor_code = professor_code;
 	}
     
+	
+	
+	public String getRegistrationId() {
+		return registrationId;
+	}
+
+	public void setRegistrationId(String registrationId) {
+		this.registrationId = registrationId;
+	}
+
+	
 }

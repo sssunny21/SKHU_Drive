@@ -6,10 +6,13 @@
 
 	<select id="selectDriveInfo" resultType="drive.Drive">
 		SELECT
-		d.d_auth,d.drive_name,u.u_name,d.drive_id,d.d_id
+		d.d_auth,d.drive_name,u.u_name,d.drive_id,d.d_id,dm.d_name
 		FROM [drive] d JOIN [users] u
 		ON
-		d.id=u.id AND u.d_id=#{d_id}
+		d.id=u.id
+		JOIN [department] dm
+		ON
+		dm.d_id=d.d_id AND u.d_id=#{d_id}
 	</select>
 	
 	<select id="selectFolderAll" resultType="drive.Folder">
@@ -66,6 +69,7 @@
 		WHERE parent_id=#{pr_id}
 	</select>
 
+
 	<select id="selectByf_id" resultType="drive.Files">
 		SELECT files_id,
 		files_name, files_size,files_date,folder_id
@@ -73,12 +77,34 @@
 		WHERE
 		folder_id=#{folder_id}
 	</select>
+	
+		<select id="selectBysf_id" resultType="drive.Files">
+		SELECT sfiles_id,
+		sfiles_name, sfiles_size,sfiles_date,sfolder_id
+		FROM sfiles
+		WHERE
+		sfolder_id=#{sfolder_id}
+	</select>
+	
 
 	<select id="selectByff_id" resultType="drive.Files">
 		SELECT *
 		FROM files
 		WHERE
 		files_id=#{files_id}
+	</select>
+	
+	<select id="selectBysff_id" resultType="drive.Files">
+		SELECT *
+		FROM sfiles
+		WHERE
+		sfiles_id=#{sfiles_id}
+	</select>
+	
+	<select id="openSfolder" resultType="drive.Folder">
+		select sfolder_pw 
+		from [share_folder]
+		where sfolder_id=#{sfolder_id}
 	</select>
 
 	<insert id="insert_folder" useGeneratedKeys="true" keyProperty="id">
@@ -108,9 +134,13 @@
 		VALUES
 		(#{files_name},#{files_size},GETDATE(),#{folder_id}, #{files_body})
 	</insert>
-
-
-
+	<insert id="insert_sfiles" useGeneratedKeys="true" keyProperty="id">
+		INSERT
+		INTO [sfiles] (sfiles_name, sfiles_size,
+		sfiles_date,sfolder_id,sfiles_body)
+		VALUES
+		(#{sfiles_name},#{sfiles_size},GETDATE(),#{sfolder_id}, #{sfiles_body})
+	</insert>
 	<insert id="insert_favorites" useGeneratedKeys="true"
 		keyProperty="id">
 		INSERT
@@ -196,7 +226,20 @@
 
 
 	<delete id="deleteFolder">
-		DELETE [folder] WHERE [folder_id] = #{folder_id}
+		<![CDATA[
+			WITH subtree AS (
+				SELECT * FROM folder
+				WHERE folder_id = #{folder_id}
+			
+				UNION ALL
+			
+				SELECT folder.* 
+				FROM folder JOIN subtree 
+					ON subtree.folder_id = folder.parent_id
+			)
+			DELETE FROM folder
+			WHERE folder_id IN (SELECT folder_id FROM subtree)
+		]]>
 	</delete>
 	<delete id="deleteFiles">
 		DELETE [files] WHERE [files_id] = #{files_id}

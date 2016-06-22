@@ -17,6 +17,7 @@ public interface DriveMapper {
 	List<Folder> selectBypr_id (int parent_id);
 	List<Files> selectByf_id(int folder_id);
 	Files selectByff_id(int files_id);
+	Files selectBysff_id(int sfiles_id);
 	void insert_folder(Folder folder);
 	void insert_folder2(Folder folder);
 	
@@ -29,6 +30,12 @@ public interface DriveMapper {
 	void deleteFiles(int files_id);
 	void insert_favorites(@Param("id") int id, @Param("folder_id") int folder_id);//폴더 즐겨찾기
 	void insert_favorites_drive(@Param("id") int id, @Param("drive_id") int drive_id);//드라이브 즐겨찾기
+	
+	//공유파일
+	List<Files> selectBySfiles_id(int sfolder_id);
+	List<Files> selectBysf_id(int sfolder_id);
+	void insert_sfiles(Files sfiles);
+	Folder openSfolder(int sfolder_id);
 	
 	//파일
 	int selectCount();

@@ -19,8 +19,9 @@ input[type=file] {
 	<div class="header clearfix" style="margin-top: 0px;">
 		<nav>
 			<ul class="nav nav-pills pull-right">
-				<li><img src="/drive/res/images/add-256.png" style="width:37px; height:37px;"
-						data-toggle="modal" data-target=".bs-example-modal-sm"></li>
+				<li><img src="/drive/res/images/add-256.png"
+					style="width: 37px; height: 37px;" data-toggle="modal"
+					data-target=".bs-example-modal-sm"></li>
 				<form:form method="post" modelAttribute="folder">
 					<div class="modal fade bs-example-modal-sm" tabindex="-1"
 						role="dialog" aria-labelledby="mySmallModalLabel">
@@ -57,10 +58,12 @@ input[type=file] {
 				<li>
 					<form id="uploadform" method="post" enctype="multipart/form-data">
 						<div class="form-group">
-							<img src="/drive/res/images/icon-upload-256.png" style="width: 50px; height:40px;" onclick="document.getElementById('file').click();"/>
-								<input type="file" id="file" name="file"
-									style="display:none;" onchange="document.getElementById('uploadform').value=this.value"/>
-							
+							<img src="/drive/res/images/icon-upload-256.png"
+								style="width: 50px; height: 40px;"
+								onclick="document.getElementById('file').click();" /> <input
+								type="file" id="file" name="file" style="display: none;"
+								onchange="document.getElementById('uploadform').value=this.value" />
+
 							<!--<input type="submit" value="업로드">
 						<img src="/drive/res/images/icon-upload-256.png" style="width: 29px; height:25px;"/>-->
 						</div>
@@ -97,6 +100,7 @@ input[type=file] {
 						</th>
 						<th>폴더 이름</th>
 						<th>폴더 사이즈</th>
+						<th></th>
 					</tr>
 				</thead>
 				<tbody>
@@ -114,6 +118,36 @@ input[type=file] {
 									</td>
 									<td>${pr.folder_name}</td>
 									<td data-url="#">${pr.folder_id }</td>
+									<td><img src="/drive/res/images/add-256.png"
+										style="width: 37px; height: 37px;" data-toggle="modal"
+										data-target=".bs-example-modal-sm1"></td>
+									<form:form method="post" modelAttribute="folder">
+										<div class="modal fade bs-example-modal-sm1" tabindex="-1"
+											role="dialog" aria-labelledby="mySmallModalLabel">
+											<div class="modal-dialog modal-sm">
+												<div class="modal-header">
+													<button type="button" class="close" data-dismiss="modal"
+														aria-label="Close">
+														<span aria-hidden="true">&times;</span>
+													</button>
+													<h4 class="modal-title">폴더 수정</h4>
+												</div>
+												<div class="modal-body">
+													<label>폴더 이름 </label>
+													<form:input path="folder_name" />
+													<br>
+													<form:hidden path="drive_id" id="dr_id" name="dr_id" />
+													<form:hidden path="folder_id" id="parent_id" name="parent_id" />
+												</div>
+											</div>
+											<div class="modal-footer">
+												<button type="button" class="btn btn-default"
+													data-dismiss="modal">닫기</button>
+												<button class="btn" type="submit" name="cmd"
+													value="editfolder2">수정</button>
+											</div>
+										</div>
+									</form:form>
 								</tr>
 							</c:when>
 						</c:choose>

@@ -37,8 +37,6 @@ public class UserController {
 		return "user/mypage";
 	}
 
-	
-
 	@RequestMapping(value="/home/join_main.pd", method=RequestMethod.GET)
 	public String join_main(User user, Model model) {
 		return "home/join_main";
@@ -91,31 +89,42 @@ public class UserController {
 		}
 		return "home/user_join";
 	}
-
-
 	
+	@RequestMapping(value="/user/mypage.pd",method = RequestMethod.POST,params="cmd=user_out")
+	public String user_out(Model model){
+		User u = UserService.getCurrentUser();
+		userMapper.delete(u.id);
+		return "redirect:/home/logout.pd";
+	}
+
 	@RequestMapping(value="/user/mypage.pd",method = RequestMethod.POST,params="cmd=deleteFavorite")
 	public String deletefavorite(@RequestParam("folder_id") int[] folder_id,Model model){
-		User u = (User)userService.getCurrentUser();
+		User u = UserService.getCurrentUser();
 		for(int i=0 ; i<folder_id.length; ++i){
 			userMapper.deleteJoinFolder(folder_id[i]);
 		}
-		List<Folder> myfolder = userMapper.selectMyFolder(u.getId()); 
-		model.addAttribute("myfolder",myfolder);
-		List<Drive> mydrive = userMapper.selectMyDrive(u.getId());
-		model.addAttribute("mydrive",mydrive);
+		if(UserService.getCurrentUser()!=null){
+			List<Folder> myfolder = userMapper.selectMyFolder(u.getId()); 
+			model.addAttribute("myfolder",myfolder);
+			List<Drive> mydrive = userMapper.selectMyDrive(u.getId());
+			model.addAttribute("mydrive",mydrive);
+			Drive user_drive = userMapper.selectDrive(u.getId());//나의 드라이브
+			model.addAttribute("drive",user_drive);
+		}
 		return "user/mypage";
 	}
 	@RequestMapping(value="/user/mypage.pd",method = RequestMethod.POST,params="cmd=deleteFavorite2")
 	public String deletefavoritedrive(@RequestParam("drive_id") int[] drive_id,Model model){
-		User u = (User)userService.getCurrentUser();
+		User u = UserService.getCurrentUser();
 		for(int i=0 ; i<drive_id.length; ++i){
 			userMapper.deleteJoinDrive(drive_id[i]);
 		}
-		List<Folder> myfolder = userMapper.selectMyFolder(u.getId()); 
-		model.addAttribute("myfolder",myfolder);
-		List<Drive> mydrive = userMapper.selectMyDrive(u.getId());
-		model.addAttribute("mydrive",mydrive);
+			List<Folder> myfolder = userMapper.selectMyFolder(u.getId()); 
+			model.addAttribute("myfolder",myfolder);
+			List<Drive> mydrive = userMapper.selectMyDrive(u.getId());
+			model.addAttribute("mydrive",mydrive);
+			Drive user_drive = userMapper.selectDrive(u.getId());//나의 드라이브
+			model.addAttribute("drive",user_drive);
 		return "user/mypage";
 	}
 
@@ -174,4 +183,29 @@ public class UserController {
 		return "user/myinfo_pw";
 
 	}
+	/**
+	@RequestMapping(value="/user/myinfo_out.pd", method=RequestMethod.GET)
+	public String myinfo_out(User user, Model model) {
+    	if(UserService.getCurrentUser()!=null){
+  	      User u = (User)UserService.getCurrentUser();
+  	      }
+		return "user/myinfo_out";
+	}
+
+	@RequestMapping(value="/user/myinfo_out.pd", method=RequestMethod.POST)
+	public String myinfo_out(Model model, User user,Test test) throws Exception {
+		user.setId(UserService.getCurrentUser().getId());
+		test.setPassword(test.password);
+		String message = userService.validatePw(user,test,test.getPassword());	
+		if (message == null) {
+			userMapper.delete(user.id);
+			model.addAttribute("successMsg", "탈퇴되었습니다.");
+		} 
+		else{
+			model.addAttribute("errorMsg", message);
+		}
+		return "user/myinfo_out";
+
+	}
+	**/
 }

@@ -158,6 +158,7 @@
 
 	<delete id="delete">
 		DELETE FROM [users] WHERE id = #{id}
+		DELETE FROM [drive] WHERE id = #{id}
 	</delete>
 
 	<delete id="deleteJoinFolder">
@@ -172,6 +173,12 @@
 		SELECT * FROM
 		[professor] WHERE d_id=#{d_id}
 	</select>
+	
+	  <update id="updateRegistrationId">
+        UPDATE [users]
+        SET registrationId = #{registrationId}
+        WHERE id = #{id}
+    </update>
 
 
 </mapper>

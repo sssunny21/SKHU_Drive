@@ -106,6 +106,12 @@
 			<version>1.9.13</version>
 		</dependency>
 
+		<dependency>
+			<groupId>com.ganyo</groupId>
+			<artifactId>gcm-server</artifactId>
+			<version>1.0.2</version>
+		</dependency>
+
 
 	</dependencies>
 	<build>

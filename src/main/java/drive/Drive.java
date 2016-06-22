@@ -6,6 +6,7 @@ public class Drive {
 	int d_id;
 	int id;
 	int d_auth;
+	String d_name;
 	
 	int p_id;
 	String u_name;
@@ -52,6 +53,12 @@ public class Drive {
 	}
 	public void setD_auth(int d_auth) {
 		this.d_auth = d_auth;
+	}
+	public String getD_name() {
+		return d_name;
+	}
+	public void setD_name(String d_name) {
+		this.d_name = d_name;
 	}
 	
 }

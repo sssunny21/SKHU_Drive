@@ -5,10 +5,8 @@
 <h1>HOME</h1>
 <hr />
 
-<h3>현재 사용자</h3>
-
 <sec:authorize access="authenticated">
-dd
+<a><sec:authentication property="user.u_name" />님 환영합니다.</a>
 </sec:authorize>
 
 <sec:authorize access="not authenticated">

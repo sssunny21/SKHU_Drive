@@ -14,7 +14,6 @@
 				<td>이름</td>
 				<td><sec:authentication property="user.u_name" /></td>
 			</tr>
-
 			<tr>
 				<td>이메일</td>
 				<td><sec:authentication property="user.u_email" /></td>
@@ -33,9 +32,12 @@
 			</tr>
 
 		</table>
-		<a href="/drive/user/myinfo_edit.pd" class="btn btn-primary">개인정보
-			수정</a> <a href="/drive/user/myinfo_pw.pd" class="btn btn-primary">비밀번호
-			변경</a>
+		<a href="/drive/user/myinfo_edit.pd" class="btn btn-primary">개인정보 수정</a>
+		<a href="/drive/user/myinfo_pw.pd" class="btn btn-primary">비밀번호 변경</a>
+		
+		<form:form method="post" id="delete">
+			<button class="btn" type="submit" name="cmd" value="user_out">회원 탈퇴</button>
+		</form:form>
 	</div>
 	<div class="col-md-6">
 		<h3>my favorite</h3>
