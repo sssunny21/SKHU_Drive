@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <style>
     label { margin-top: 10px; }
@@ -20,6 +20,7 @@
         <i class="icon-check icon-white"></i> 로그인
    </button>
          <a href="sechPW.pd">비밀번호찾기</a>
+         <a href="join_main.pd">회원가입</a>
 </form>
 
 <c:if test="${ param.error != null }">

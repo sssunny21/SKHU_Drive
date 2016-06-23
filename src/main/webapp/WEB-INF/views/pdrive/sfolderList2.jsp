@@ -13,16 +13,30 @@ input[type=file] {
 	width: 600px;
 	margin: 5px 0 5px 0;
 }
+li.right{float:right;}
+button.right{
+	float:right;
+	background-image: none;
+	border: 0px solid transparent;
+}
 </style>
 <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main"
 	style="margin-left: 0px;">
 	<div class="header clearfix" style="margin-top: 0px;">
 		<nav>
-			<ul class="nav nav-pills pull-right">
-				<li role="presintation"><a href="#">전체 선택</a></li>
-				<li role="presintation"><a href="#">파일 내리기</a></li>
-				<li role="presintation"><a href="#">삭제</a></li>
-				<li class="dropdown"><a href="#" class="dropdown-toggle"
+			<ul class="nav nav-pills">
+				<li><h4 class="text-muted">홈 > ${sn.sfolder_name}</h4></li>
+				<li class="right" style="margin-bottom: 10px;margin-right: 10px;">
+					<form id="uploadform" method="post" enctype="multipart/form-data">
+						<img src="/drive/res/images/upload.png"
+							style="width: 40px; height: 40px;"
+							onclick="document.getElementById('file').click();" /> <input
+							type="file" id="file" name="file" style="display: none;"
+							onchange="document.getElementById('uploadform').value=this.value" />
+					</form>
+					<h6>업로드</h6>
+				</li>
+				<!--<li class="dropdown"><a href="#" class="dropdown-toggle"
 					data-toggle="dropdown" role="button" aria-haspopup="true"
 					aria-expanded="false">정렬 <span class="caret"></span></a>
 					<ul class="dropdown-menu">
@@ -30,54 +44,34 @@ input[type=file] {
 						<li><a href="#">이름 내림차순</a></li>
 						<li><a href="#">날짜 오름차순</a></li>
 						<li><a href="#">날짜 내림차순</a></li>
-					</ul></li>
+					</ul></li>-->
 
 			</ul>
 		</nav>
-		<h5 class="text-muted">홈 > 폴더이름</h5>
 	</div>
-
-	<h2 class="sub-header">세부사항</h2>
 	<div class="table-responsive">
 		<form:form method="post" id="formfiles">
-			<table class="table table-striped">
-				<thead>
-					<tr>
-						<th>
-							<div class="checkbox"
-								style="margin-top: 0px; margin-bottom: 0px;">
-								<label><input type="checkbox"></label>
-							</div>
-						</th>
-						<th>파일 이름</th>
-						<th>파일 사이즈</th>
-						<th>파일 생성일</th>
-					</tr>
-				</thead>
-				<tbody>
-					<c:forEach var="fd" items="${fd}">
-						<tr data-url="/drive/pdrive/download.pd?id=${fd.sfiles_id}">
-							<td>
-								<div class="checkbox"
-									style="margin-top: 0px; margin-bottom: 0px;">
-									<label><input type="checkbox" name="sfiles_id"
-										value="${fd.sfiles_id}"></label>
-								</div>
-							</td>
-							<td>${fd.sfiles_name}</td>
-							<td>${fd.sfiles_size}</td>
-							<td>${fd.sfiles_date}</td>
-						</tr>
-					</c:forEach>
-				</tbody>
-			</table>
-			<button class="btn" type="submit" name="cmd" value="deleteFiles">삭제</button>
+				<button class="right" type="submit" name="cmd" value="deleteFiles"style="background-color: rgba(255, 255, 255, 0);">
+				<img class="btn-img" src="/drive/res/images/delete.png" style="width: 40px; height: 40px;">
+				<h6>파일 삭제</h6>
+				</button>
+			<c:forEach var="fd" items="${fd}">
+				<div class="img-thumbnail" style="margin-bottom: 40px; margin-right: 60px;">
+					<div class="checkbox" style="margin-top: 0px; margin-bottom: 0px;">
+						<label><input type="checkbox" name="files_id" value="${fd.files_id}"></label>
+					</div>
+					<center>
+					<a href="/drive/pdrive/s_download.pd?id=${fd.sfiles_id}">
+					<c:url var="imageUrl" value="/pdrive/downloadImage2.pd?id=${ fd.sfiles_id }" />
+						<img src="${ imageUrl }" style="width: 100px; height: 100px;" />
+					</a>
+					<h6>${fd.sfiles_name}
+					<a href="/drive/pdrive/download.pd?id=${fd.sfiles_id}">
+					<img src="/drive/res/images/download.png" style="width: 20px; height: 20px; margin-left: 10px;" >
+					</a>
+					</h6></center>
+				</div>
+			</c:forEach>
 		</form:form>
 	</div>
-	<form method="post" enctype="multipart/form-data">
-		<div class="form-group">
-			<label>file</label> <input type="file" id="file" name="file">
-			<input type="submit" value="업로드">
-		</div>
-	</form>
 </div>

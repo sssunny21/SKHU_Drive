@@ -1,5 +1,7 @@
 package drive;
 
+import java.io.IOException;
+
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -54,6 +56,11 @@ public class DriveService {
 				(drive.getId()==UserService.getCurrentUser().getId());
 	}//로그인한 사용자가 드라이브 소유자인지 검사
 	
+	public boolean isCreateShare(Drive drive){
+		if(drive.d_auth==2) return true;
+		else return false;
+	}
+	
 	public boolean canCreate(int sfolder_id){
 		User user = UserService.getCurrentUser();
 		if(user == null) return false;
@@ -69,6 +76,35 @@ public class DriveService {
         if (user == null) return false;
         if ("2".equals(user.getU_auth())) return true;
         return isAuthor(drive);
+    }
+    
+    public static boolean badFileExtIsReturnBoolean(Files files) {
+        String fileName = files.getFiles_name();
+        String ext = fileName.substring(fileName.lastIndexOf(".") + 1,
+                fileName.length());
+        final String[] BAD_EXTENSION = { "txt", "php", "jsp", "html","docx","pdf" };
+ 
+        int len = BAD_EXTENSION.length;
+        for (int i = 0; i < len; i++) {
+            if (ext.equalsIgnoreCase(BAD_EXTENSION[i])) {
+                return true; // 지정 확장자가 존재하면 true
+            }
+        }
+        return false;
+    }
+    public static boolean badFileExtIsReturnBoolean2(Files files) {
+        String fileName = files.getSfiles_name();
+        String ext = fileName.substring(fileName.lastIndexOf(".") + 1,
+                fileName.length());
+        final String[] BAD_EXTENSION = { "txt", "php", "jsp", "html","docx","pdf" };
+ 
+        int len = BAD_EXTENSION.length;
+        for (int i = 0; i < len; i++) {
+            if (ext.equalsIgnoreCase(BAD_EXTENSION[i])) {
+                return true; // 지정 확장자가 존재하면 true
+            }
+        }
+        return false;
     }
 
 

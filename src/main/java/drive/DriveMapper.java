@@ -10,6 +10,8 @@ public interface DriveMapper {
 	Folder selectBydr_id(int dr_id);
 	Folder selectByfd_id(int fd_id);
 	Folder selectBySfd_id(int sfolder_id);
+	Folder selectFolder_name(int folder_id);//폴더 이름 출력
+	Folder selectShare_name(int sfolder_id);//공유폴더 이름 출력
 	Drive selectDrive(int drive_id);
 	
 	List<Folder> selectBydr_id1(int drive_id);
@@ -18,16 +20,18 @@ public interface DriveMapper {
 	List<Files> selectByf_id(int folder_id);
 	Files selectByff_id(int files_id);
 	Files selectBysff_id(int sfiles_id);
-	void insert_folder(Folder folder);
+	void insert_folder(Folder folder);//폴더 생성
 	void insert_folder2(Folder folder);
+	void insert_sfolder(Folder folder);//공유 폴더 생성
 	
-	void update_folder(Folder folder);
-	void update_sfolder(Folder folder);
+	void update_folder(Folder folder);//폴더 수정
+	void update_sfolder(Folder folder);//공유 폴더 수정
 	
-	void insert_sfolder(Folder folder);
-	void insert_files(Files files);
-	void deleteFolder(int folder_id);
-	void deleteFiles(int files_id);
+	void insert_files(Files files);//파일 업로드
+	void deleteFolder(int folder_id);//폴더 삭제
+	void deleteSFolder (int sfolder_id);//공유 폴더 삭제
+	void deleteFiles(int files_id);//파일 삭제
+	void deleteSFiles(int sfiles_id);//공유 파일 삭제
 	void insert_favorites(@Param("id") int id, @Param("folder_id") int folder_id);//폴더 즐겨찾기
 	void insert_favorites_drive(@Param("id") int id, @Param("drive_id") int drive_id);//드라이브 즐겨찾기
 	
@@ -44,4 +48,6 @@ public interface DriveMapper {
 	//폴더
 	int selectCount2();
 	List<Drive> selectPage2(Pagination pagination);
+	
+	int inSfolder(Folder folder);
 }

@@ -7,14 +7,16 @@
 	<select id="selectDriveInfo" resultType="drive.Drive">
 		SELECT
 		d.d_auth,d.drive_name,u.u_name,d.drive_id,d.d_id,dm.d_name
-		FROM [drive] d JOIN [users] u
+		FROM [drive]
+		d JOIN [users] u
 		ON
 		d.id=u.id
 		JOIN [department] dm
 		ON
-		dm.d_id=d.d_id AND u.d_id=#{d_id}
+		dm.d_id=d.d_id AND
+		u.d_id=#{d_id}
 	</select>
-	
+
 	<select id="selectFolderAll" resultType="drive.Folder">
 		SELECT * FROM [folder]
 	</select>
@@ -61,12 +63,26 @@
 		WHERE
 		drive_id=#{dr_id}
 	</select>
+	
+	<select id="selectShare_name" resultType="drive.Folder">
+		SELECT sfolder_id,sfolder_name
+		FROM [share_folder]
+		WHERE
+		sfolder_id=#{sfolder_id}
+	</select>
 
 	<select id="selectBypr_id" resultType="drive.Folder">
 		SELECT folder_id,
 		folder_name,drive_id,parent_id
 		FROM folder
 		WHERE parent_id=#{pr_id}
+	</select>
+	
+	<select id="selectFolder_name" resultType="drive.Folder">
+		SELECT folder_id,folder_name
+		FROM [folder]
+		WHERE
+		folder_id = #{folder_id}
 	</select>
 
 
@@ -77,33 +93,31 @@
 		WHERE
 		folder_id=#{folder_id}
 	</select>
-	
-		<select id="selectBysf_id" resultType="drive.Files">
+
+	<select id="selectBysf_id" resultType="drive.Files">
 		SELECT sfiles_id,
 		sfiles_name, sfiles_size,sfiles_date,sfolder_id
 		FROM sfiles
 		WHERE
 		sfolder_id=#{sfolder_id}
 	</select>
-	
-
 	<select id="selectByff_id" resultType="drive.Files">
 		SELECT *
 		FROM files
 		WHERE
 		files_id=#{files_id}
 	</select>
-	
 	<select id="selectBysff_id" resultType="drive.Files">
 		SELECT *
 		FROM sfiles
 		WHERE
 		sfiles_id=#{sfiles_id}
 	</select>
-	
+
 	<select id="openSfolder" resultType="drive.Folder">
-		select sfolder_pw 
-		from [share_folder]
+		select sfolder_pw
+		from
+		[share_folder]
 		where sfolder_id=#{sfolder_id}
 	</select>
 
@@ -139,7 +153,8 @@
 		INTO [sfiles] (sfiles_name, sfiles_size,
 		sfiles_date,sfolder_id,sfiles_body)
 		VALUES
-		(#{sfiles_name},#{sfiles_size},GETDATE(),#{sfolder_id}, #{sfiles_body})
+		(#{sfiles_name},#{sfiles_size},GETDATE(),#{sfolder_id},
+		#{sfiles_body})
 	</insert>
 	<insert id="insert_favorites" useGeneratedKeys="true"
 		keyProperty="id">
@@ -207,10 +222,15 @@
 	<select id="selectCount2" resultType="int"> SELECT COUNT(*) FROM
 		[folder]
 	</select>
-
+	
+	<select id="inSfolder" resultType="int">
+		SELECT COUNT(*) FROM
+		[share_folder]
+		WHERE sfolder_id=${sfolder_id} AND sfolder_pw='${sfolder_pw}'
+	</select>
 
 	<update id="update_folder">
-		UPDATE [folder] SET 
+		UPDATE [folder] SET
 		folder_name = #{folder_name}
 		WHERE
 		folder_id=#{folder_id}
@@ -218,13 +238,12 @@
 
 	<update id="update_sfolder">
 		UPDATE [share_folder] SET
-		sfolder_name = #{sfolder_name},
+		sfolder_name =
+		#{sfolder_name},
 		sfolder_pw = #{sfolder_pw}
-		WHERE sfolder_id=#{sfolder_id}
+		WHERE
+		sfolder_id=#{sfolder_id}
 	</update>
-
-
-
 	<delete id="deleteFolder">
 		<![CDATA[
 			WITH subtree AS (
@@ -241,8 +260,15 @@
 			WHERE folder_id IN (SELECT folder_id FROM subtree)
 		]]>
 	</delete>
+	<delete id="deleteSFolder">
+		DELETE FROM [share_folder]
+		WHERE sfolder_id=#{sfolder_id}
+	</delete>
 	<delete id="deleteFiles">
 		DELETE [files] WHERE [files_id] = #{files_id}
+	</delete>
+	<delete id="deleteSFiles">
+		DELETE [sfiles] WHERE [sfiles_id] = #{sfiles_id}
 	</delete>
 
 

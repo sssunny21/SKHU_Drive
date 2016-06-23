@@ -12,15 +12,11 @@
 		<div class="callapse navbar-collapse">
 			<ul class="nav navbar-nav">
 				<sec:authorize access="authenticated">
-					<li><a
-						href="/drive/pdrive/folderList.pd?dr_id=${drive.drive_id}">내
-							드라이브</a>
-					<li><a href="#">공유폴더</a>
-					<li><a href="#">필기노트</a>
+					<li><a href="/drive/pdrive/folderList.pd?dr_id=${drive.drive_id}">내 드라이브</a>
 				</sec:authorize>
 				<li><sec:authorize access="not authenticated">
 						<a href="/drive/home/join_main.pd">회원가입</a>
-					</sec:authorize>
+					</sec:authorize></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<sec:authorize access="not authenticated">

@@ -18,7 +18,7 @@ public class HomeController {
    @Autowired DepartmentMapper departmentMapper;
 
    @RequestMapping("/home/index.pd")
-    public String index(Model model) throws Exception {
+   public String index(Model model) throws Exception {
       if(UserService.getCurrentUser()!=null){
       User u = (User)UserService.getCurrentUser();
       List<Drive> professor = userMapper.selectProfessor(u.getD_id());
@@ -115,5 +115,10 @@ public class HomeController {
           model.addAttribute("errorMsg", message);
        }
        return "home/changePW";
+    }
+    
+    @RequestMapping("/home/access_denied.pd")
+    public String access_denied(Model model) throws Exception {
+    	return "home/access_denied";
     }
 }

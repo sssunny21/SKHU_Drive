@@ -6,3 +6,4 @@ form.pagination select[name=ss] { width: 100px; }
 form.pagination select[name=sz] { width: 80px; float: right; }
 form.pagination select[name=od] { width: 150px; margin-right: 100px; }
 div.img-thumbnail{ border:0px }
+li.right{float:right;}
