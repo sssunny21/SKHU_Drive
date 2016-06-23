@@ -43,6 +43,10 @@
 		<put-attribute name="content4" value="/WEB-INF/views/user/{1}.jsp" />
 	</definition>
 	
+	<definition name="home/*" extends="userLayout">
+		<put-attribute name="content4" value="/WEB-INF/views/home/{1}.jsp" />
+	</definition>
+	
 	<definition name="*/*" extends="commonLayout">
 		<put-attribute name="content" value="/WEB-INF/views/{1}/{2}.jsp" />
 	</definition>

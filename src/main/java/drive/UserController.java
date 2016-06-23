@@ -42,8 +42,8 @@ public class UserController {
 		return "home/join_main";
 	}
 	
-	@RequestMapping(value="/home/join_main.pd", method=RequestMethod.POST)
-	public String join_main(Model model,User user ) throws Exception{
+	@RequestMapping(value="/home/join_main.pd", method=RequestMethod.POST, params="cmd=p_code")
+	public String join_main(Model model,User user) throws Exception{
 		String message = userService.validateBeforeInsertP(user);
 		if (message == null){
 			return "redirect:/home/professor_join.pd";

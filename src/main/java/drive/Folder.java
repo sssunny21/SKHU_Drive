@@ -11,6 +11,7 @@ public class Folder {
 	int sfolder_id;
 	String sfolder_name;
 	String sfolder_pw;
+	int share;
 	
 	int id;
 	int join_id;
@@ -83,5 +84,10 @@ public class Folder {
 	public void setJoin_id(int join_id) {
 		this.join_id = join_id;
 	}
-	
+	public int getShare() {
+		return share;
+	}
+	public void setShare(int share) {
+		this.share = share;
+	}
 }
