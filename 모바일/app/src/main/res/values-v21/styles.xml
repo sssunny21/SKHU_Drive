@@ -1,0 +1,31 @@
+<resources>>
+
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+    </style>
+
+    <style name="TE_Theme" parent="Theme.AppCompat.Light.NoActionBar" >
+        <item name="colorPrimary">@color/TE_actionBarMiddle</item>
+        <item name="colorPrimaryDark">@color/TE_actionBarHigh</item>
+        <item name="colorAccent">@color/TE_colorAccent</item>
+        <item name="android:colorForeground">@color/TE_background</item>
+        <item name="android:colorBackground">@color/TE_background</item>
+        <item name="android:textColorPrimary">@color/TE_HeadLineText</item>
+    </style>
+
+    <style name="WhiteTheme" parent="Theme.AppCompat.NoActionBar">
+        <item name="colorPrimary">@color/white_colorPrimary</item>
+        <item name="colorPrimaryDark">@color/white_colorPrimaryDark</item>
+        <item name="colorAccent">@color/white_colorAccent</item>
+        <item name="android:colorBackground">@color/white_background</item>
+        <item name="android:colorForeground">@color/white_background</item>
+        <item name="android:navigationBarColor">@color/abc_input_method_navigation_guard</item>
+        <item name="android:textColorPrimary">@color/TE_TitleText</item>
+        <item name="android:textColorPrimaryInverse">@color/TE_background</item>
+        <item name="android:textColorSecondary">@color/TE_CaptionText</item>
+    </style>
+
+</resources>

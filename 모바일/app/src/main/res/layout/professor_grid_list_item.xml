@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:layout_height="100dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/professor_item"
+    android:layout_width="match_parent"
+    android:layout_margin="10dp"
+    android:orientation="vertical">
+
+    <net.steamcrafted.materialiconlib.MaterialIconView
+        android:id="@+id/professor_icon"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="3"
+        android:scaleType="fitCenter"
+        app:materialIcon="folder"
+        app:materialIconSize="48dp"
+        app:materialIconColor="@color/white_colorAccent"
+        />
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+        <TextView
+            android:singleLine="true"
+            android:textColor="@color/white_title"
+            android:id="@+id/professor_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="left|center"
+            android:text="이승진 드라이브"
+            android:textSize="11dp" />
+
+        <TextView
+            android:paddingRight="50dp"
+            android:textColor="@color/white_body"
+            android:id="@+id/professor_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="left|center"
+            android:textStyle="bold"
+            android:text="이승진"
+            android:textSize="8dp" />
+
+    </LinearLayout>
+
+
+
+</LinearLayout>

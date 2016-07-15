@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group
+        android:id="@+id/drawer_group"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/drawer_folder"
+            android:title="공유 폴더">
+            <menu>
+
+            </menu>
+        </item>
+    </group>
+
+
+</menu>

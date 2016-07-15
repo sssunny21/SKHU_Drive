@@ -1,0 +1,6 @@
+1. realm
+2. loopj
+3. compile 'net.steamcrafted:materialiconlib:1.0.9' :apache 2
+4. DividerItemDecoration :apache2
+5. compile 'com.rengwuxian.materialedittext:library:2.1.4' : apache 2
+6.  compile 'com.github.dmytrodanylyk.android-process-button:library:1.0.4' : mit license

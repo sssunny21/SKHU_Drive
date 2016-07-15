@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="18dp"
+        android:text="ID"
+        android:textColor="#80000000"
+        android:textSize="14dp" />
+
+    <com.rengwuxian.materialedittext.MaterialEditText
+        android:maxLines="1"
+        app:met_baseColor="#0056d3"
+        android:id="@+id/input_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:textSize="14dp"
+        app:met_errorColor="#ddaa00"
+        app:met_floatingLabel="normal"
+        app:met_primaryColor="#982360"
+        app:met_singleLineEllipsis="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="Password"
+        android:textColor="#80000000"
+        android:textSize="14dp" />
+
+    <com.rengwuxian.materialedittext.MaterialEditText
+        android:maxLines="1"
+        app:met_baseColor="#0056d3"
+        android:id="@+id/input_password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPassword"
+        android:textSize="14dp"
+        app:met_errorColor="#ddaa00"
+        app:met_floatingLabel="normal"
+        app:met_primaryColor="#982360"
+        app:met_singleLineEllipsis="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="이름"
+        android:textColor="#80000000"
+        android:textSize="14dp" />
+
+    <com.rengwuxian.materialedittext.MaterialEditText
+        android:maxLines="1"
+        android:textSize="14dp"
+        android:id="@+id/input_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:met_baseColor="#0056d3"
+        app:met_errorColor="#ddaa00"
+        app:met_floatingLabel="normal"
+        app:met_primaryColor="#982360"
+        app:met_singleLineEllipsis="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="전화번호"
+        android:textColor="#80000000"
+        android:textSize="14dp" />
+
+    <com.rengwuxian.materialedittext.MaterialEditText
+        android:maxLines="1"
+        android:textSize="14dp"
+        android:id="@+id/input_phoneNumber"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:met_baseColor="#0056d3"
+        app:met_errorColor="#ddaa00"
+        app:met_primaryColor="#982360"
+        app:met_floatingLabel="normal"
+        app:met_singleLineEllipsis="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="이메일"
+        android:textColor="#80000000"
+        android:textSize="14dp" />
+
+    <com.rengwuxian.materialedittext.MaterialEditText
+        app:met_baseColor="#0056d3"
+        app:met_errorColor="#ddaa00"
+        app:met_primaryColor="#982360"
+        android:maxLines="1"
+        app:met_singleLineEllipsis="true"
+        android:id="@+id/input_email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="14dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="18dp"
+        android:text="학년"
+        android:textColor="#80000000"
+        android:textSize="14dp" />
+
+    <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:inputType="text"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/input_grade1"
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:text="1"
+            android:textColor="#80000000" />
+
+        <RadioButton
+            android:id="@+id/input_grade2"
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:text="2"
+            android:textColor="#80000000" />
+
+        <RadioButton
+            android:id="@+id/input_grade3"
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:text="3"
+            android:textColor="#80000000" />
+
+        <RadioButton
+            android:id="@+id/input_grade4"
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:text="4"
+            android:textColor="#80000000" />
+    </RadioGroup>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="비밀번호 찾기 질문"
+
+        android:textColor="#80000000"
+        android:textSize="14dp" />
+
+    <com.rengwuxian.materialedittext.MaterialEditText
+        android:maxLines="1"
+        app:met_baseColor="#0056d3"
+        android:id="@+id/input_passwordA"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:met_errorColor="#ddaa00"
+        app:met_floatingLabel="normal"
+        app:met_primaryColor="#982360"
+        app:met_singleLineEllipsis="true"
+        android:textSize="14dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="비밀번호 찾기 답"
+        android:textColor="#80000000"
+        android:textSize="14dp" />
+
+    <com.rengwuxian.materialedittext.MaterialEditText
+        android:maxLines="1"
+        app:met_baseColor="#0056d3"
+        android:id="@+id/input_passwordQ"
+        app:met_errorColor="#ddaa00"
+        app:met_floatingLabel="normal"
+        app:met_primaryColor="#982360"
+        app:met_singleLineEllipsis="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="14dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="학과"
+        android:textColor="#80000000"
+        android:textSize="14dp" />
+
+    <Spinner
+        android:id="@+id/input_major"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </Spinner>
+
+</LinearLayout>

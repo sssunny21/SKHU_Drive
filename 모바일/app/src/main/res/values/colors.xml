@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+
+
+    <!--template color-->
+    <color name="TE_actionBarMiddle">#795548</color>
+    <color name="TE_actionBarHigh">#5d4037</color>
+    <color name="TE_background">#cef8f8f8</color>
+
+    <color name="TE_Display1Text">#8A000000</color>
+    <color name="TE_HeadLineText">#DE000000</color>
+    <color name="TE_TitleText">#de000000</color>
+    <color name="TE_SubHeaderText">#DE000000</color>
+    <color name="TE_BodyText">#DE000000</color>
+    <color name="TE_CaptionText">#8a000000</color>
+    <color name="TE_ButtonText">#DE000000</color>
+
+
+    <color name="TE_SnackBar">#1d262a</color>
+    <color name="TE_colorAccent">#fdd835</color>
+    <color name="TE_colorButton">#795548</color>
+
+
+    <!--white template-->
+    <color name="white_colorPrimary">#2b3139</color>
+    <color name="white_colorPrimaryDark">#191f28</color>
+    <color name="white_colorAccent">#06bebd</color>
+    <color name="white_background">#ffffff</color>
+    <color name="white_loginbox">#f7f7f8</color>
+    <color name="white_colorAccentPress">#03afae</color>
+
+    <color name="white_title">#535964</color>
+    <color name="white_smallTitle">#b6b9be</color>
+    <color name="white_body">#919395</color>
+
+    <!--setting color -->
+    <color name="setting_background">#f3f3f3</color>
+    <color name="setting_item">#ffffff</color>
+</resources>

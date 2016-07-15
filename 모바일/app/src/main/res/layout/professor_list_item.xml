@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:layout_height="50dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/professor_item"
+    android:layout_width="match_parent"
+    android:layout_margin="10dp"
+    android:orientation="horizontal">
+
+    <net.steamcrafted.materialiconlib.MaterialIconView
+        android:id="@+id/professor_icon"
+        android:layout_weight="1.5"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:scaleType="fitCenter"
+        app:materialIcon="folder"
+        app:materialIconColor="@color/white_colorAccent"
+        app:materialIconSize="36dp"
+        />
+    <LinearLayout
+        android:layout_marginLeft="10dp"
+        android:orientation="vertical"
+        android:layout_weight="8"
+        android:layout_width="0dp"
+        android:layout_height="match_parent">
+    <TextView
+
+        android:singleLine="true"
+        android:textColor="@color/white_title"
+        android:id="@+id/professor_content"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="left|center"
+        android:text="이승진 드라이브"
+        android:textSize="15dp" />
+
+    <TextView
+        android:paddingRight="50dp"
+        android:textColor="@color/white_body"
+        android:id="@+id/professor_name"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="left|center"
+        android:textStyle="bold"
+        android:text="이승진"
+        android:textSize="13dp" />
+
+    </LinearLayout>
+
+
+    <net.steamcrafted.materialiconlib.MaterialIconView
+        android:id="@+id/professor_nextIcon"
+        android:layout_width="30dp"
+        android:layout_height="match_parent"
+        android:scaleType="center"
+        app:materialIcon="chevron_right"
+        app:materialIconColor="@color/white_colorAccent"
+        app:materialIconSize="24dp" />
+
+
+</LinearLayout>
