@@ -1,4 +1,5 @@
 #SKHU_Drive
+!(https://raw.githubusercontent.com/sssunny21/SKHU_Drive/master/images/main.png)
 ###WHAT IS THIS?
 ###### 웹과 모바일에서 사용가능한 교내용 웹하드 
 ###### 교수는 강의노트를 업로드 할 수 있으며 공유폴더를 생성해 학생들이 과제를 낼 수 있도록 한다.
